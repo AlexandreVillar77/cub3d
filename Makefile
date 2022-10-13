@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+         #
+#    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:48:10 by thbierne          #+#    #+#              #
-#    Updated: 2022/10/03 10:25:15 by thbierne         ###   ########.fr        #
+#    Updated: 2022/10/13 16:14:18 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS =	srcs/cub3d.c								\
 		srcs/raycasting/ray_utils.c					\
 		srcs/utils/utils1.c							\
 		srcs/utils/utils2.c							\
+		srcs/3dtest/ver_linep.c						\
 
 OBJS = $(SRCS:.c=.o)
 

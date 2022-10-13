@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/13 15:33:33 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/13 16:13:44 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,5 +256,11 @@ int		check_if_set(t_cube *cube);
 //map_to_tab.c
 int		check_for_wp(char c);
 int		read_keep(int fd, char **tab, int x, t_cube *cube);
+
+
+
+
+void	print_ver_line(t_cube *cube);
+
 
 # endif
