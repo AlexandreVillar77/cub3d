@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:59:19 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/13 15:25:05 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/13 16:15:20 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,91 @@ ddwin_s * distance a laquelle le mur fait sa taille max / la taille du rayon
 donc faire attention a afficher les pixels que s'il feat dans la fenetre
 */
 
+int	get_sr(int nb, int x, int i)
+{
+	if (nb > x)
+		return (get_sr(nb / x, x, ++i));
+	else
+		return (++i);
+}
+
+char *convert(int nb)
+{
+	char *base;
+	char *rt;
+	int	x;
+
+	x = (get_sr(nb , 16, 0));
+	rt = malloc(sizeof(char) * (x + 1));
+	if (!rt)
+		exit(EXIT_FAILURE);
+	base = "0123456789ABCDEF";
+	rt[x] = '\0';
+	x--;
+	while (nb > 16 && x >= 0)
+	{
+		rt[x] = base[nb % 16];
+		x--;
+		nb = nb / 16;
+	}
+	rt[x] = base[nb];
+	return (rt);
+}
+
+char	*convertcol(int nb, int nbx, int nbr)
+{
+	char *rtn;
+	char *tmp;
+
+	rtn = "0x";
+	tmp = ft_strjoin(rtn, convert(nb));
+	rtn = ft_strjoin(tmp, convert(nbx));
+	free (tmp);
+	tmp = ft_strjoin(rtn, convert(nbr));
+	free (rtn);
+	return (tmp);
+}
+
+void	draw_back(t_ddd **dd, t_cube *cube, int ceil, int floor)
+{
+	char	*pixel;
+	int		i;
+	int		x;
+
+	i = -1;
+	while (++i < (*dd)->winh / 2)
+	{
+		x = -1;
+		while (++x < (*dd)->winw)
+		{
+			pixel = (*dd)->ml_img->addr + ((i * (*dd)->ml_img->line_len + x * ((*dd)->ml_img->bpp / 8)));
+			*(int *)pixel = ceil;
+		}
+	}
+	while (++i < (*dd)->winh)
+	{
+		x = -1;
+		while (++x < (*dd)->winw)
+		{
+			pixel = (*dd)->ml_img->addr + ((i * (*dd)->ml_img->line_len + x * ((*dd)->ml_img->bpp / 8)));
+			*(int *)pixel = floor;
+		}
+	}
+}
+
 void	draw_ddd(t_ddd *dd, t_cube *cube, t_ray *ray)
 {
 	float		h;
 	int			y;
+	int			i;
 
 	y = ddwin_s / 2;
-	h = 
+	i = -1;
+	h = ddwin_s * Max_at / ray->eucli / 2;
+	/*while (++i)
+	{
+
+	}*/
 }
 
 void	print_ver_line(t_cube *cube)
@@ -59,14 +137,16 @@ void	print_ver_line(t_cube *cube)
 	dd = init_ddd(cube);
 	pa = cube->mlx->chara->pa - Pov_2;
 	goal = cube->mlx->chara->pa + Pov_2;
-	while (pa < goal)
+	draw_back(&dd, cube, 0xFF5641, 0x859574);
+	mlx_put_image_to_window(cube->mlx->mlx_ptr, dd->win_ptr, dd->ml_img->mlx_img, 0, 0);
+	/*while (pa < goal)
 	{
 		ray = ray_casting(cube, pa);
 
-		/*if (ray->side == 0)
+		if (ray->side == 0)
 			ray->perpwdist = (ray->sidedist_x - ray->delta_x) ;*/
-		pa += step;
+		/*pa += step;
 		dd->index++;
 		free (ray);
-	}
+	}*/
 }

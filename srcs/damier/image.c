@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:24:23 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/12 13:12:38 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/13 16:13:16 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ int	render(t_cube *cube)
 		mlx_put_image_to_window(cube->mlx->mlx_ptr, cube->mlx->win_ptr, cube->mlx->img->mlx_img, 0, 0);
 		cube->mlx->mapdone = 1;
 		print_chara(cube);
+		print_ver_line(cube);
+
 	}
 	if (cube->chara_move == 1)
 	{
