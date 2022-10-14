@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:51:41 by avillar           #+#    #+#             */
-/*   Updated: 2022/09/16 11:19:10 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:52:21 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,37 @@ void	free_map_map(char **map)
 	free (map);
 }
 
+void	free_splits(t_cube *cube)
+{
+	int	i;
+
+	i = -1;
+	if (cmfc)
+	{
+		while (cmfc[++i])
+			free (cmfc[i]);
+		free (cmfc);
+	}
+	i = -1;
+	if (cmfc)
+	{
+		while (cmcc[++i])
+			free (cmcc[i]);
+		free (cmcc);
+	}
+}
+
 void	free_map(t_cube *cube)
 {
 	if (cno)
 		free (cno);
-	if (ccc)
-		free (ccc);
+	free_splits(cube);
 	if (cso)
 		free (cso);
 	if (cea)
 		free (cea);
 	if (cwe)
 		free (cwe);
-	if (cfc)
-		free (cfc);
 	if (cube->map->map)
 		free_map_map(cube->map->map);
 }

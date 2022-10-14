@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 09:52:10 by avillar           #+#    #+#             */
-/*   Updated: 2022/09/15 10:01:52 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:53:36 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	manager(int fd, char c, t_cube *cube, char *str)
 
 int	check_if_set(t_cube *cube)
 {
-	if (ccc && cno && cso && cea && cwe && cfc)
+	if (cmcc && cno && cso && cea && cwe && cmfc)
 		return (0);
 	else
 		return (1);

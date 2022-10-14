@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/13 16:13:44 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:15:22 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 # include <math.h>
 
 //define pour map
-# define ccc cube->map->Cellcolor
+# define cmcc cube->map->Cellcolor
 # define cno cube->map->NO
 # define cso cube->map->SO
 # define cea cube->map->EA
 # define cwe cube->map->WE
-# define cfc cube->map->Fcolor
+# define cmfc cube->map->Fcolor
 # define cmap cube->map->map
 
 //define pour dimension et nombre carre
@@ -94,6 +94,7 @@ struct s_ddd
 	int		winw;
 	int		index;
 	t_img	*ml_img;
+	t_img	*backg;
 };
 
 struct s_img
@@ -103,6 +104,7 @@ struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	uint8_t	*pimg;
 };
 
 struct s_map
@@ -112,8 +114,8 @@ struct s_map
 	char	*EA;
 	char	*SO;
 	char	*WE;
-	char	*Fcolor;
-	char	*Cellcolor;
+	char	**Fcolor;
+	char	**Cellcolor;
 };
 
 struct s_chara

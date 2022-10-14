@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 09:54:55 by thbierne          #+#    #+#             */
-/*   Updated: 2022/09/23 12:45:59 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:54:23 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	print_map(t_cube *cube)
 	printf("WE = %s\n", cube->map->WE);
 	printf("EA = %s\n", cube->map->EA);
 	printf("SO = %s\n", cube->map->SO);
-	printf("Fc = %s\n", cube->map->Fcolor);
-	printf("Cellcolor = %s\n", cube->map->Cellcolor);
+	//printf("Fc = %s\n", cube->map->Fcolor);
+	//printf("Cellcolor = %s\n", cube->map->Cellcolor);
 	if (!cube->map->map)
 		return ;
 	while (cube->map->map[i])

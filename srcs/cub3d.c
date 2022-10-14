@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:49:30 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/13 15:33:26 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:29:03 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDWR);
 	read_keep(fd, NULL, 0, cube);
 	tab_xy(cube);
-	print_map(cube);
+	//print_map(cube);
 	cube->mlx = init_ml();
 	get_size_square(cube);
 	ml_loop(cube);
-	printf("max = %f\n", Max_at);
-	printf("carre = %f\n", squax);
+	//printf("carre = %f\n", squax);
 	free_cube(cube);
 	close (fd);
 	return (0);
