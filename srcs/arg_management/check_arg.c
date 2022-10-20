@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:05:39 by thbierne          #+#    #+#             */
-/*   Updated: 2022/09/15 09:28:57 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:42:30 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ int	check_cub(char *argv)
 
 int	check_arg(int argc, char **argv)
 {
-	int	i;
 
 	if (argc != 2)
 	{
 		handle_error(1);
 		return (1);
 	}
-	i = ft_strlen(argv[1]);
 	if (check_cub(argv[1]) == 1)
 	{
 		handle_error(2);

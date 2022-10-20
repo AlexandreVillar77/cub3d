@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:47 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/20 12:43:42 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:31:19 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_cube	*init_cube(void)
 	cube->mlx = NULL;
 	cube->largestl = 0;
 	cube->nline = 0;
-	cube->chara_move = 0;
+	cube->chara_move = 1;
 	cube->mapls = NULL;
 	cube->dd = NULL;
 	return (cube);

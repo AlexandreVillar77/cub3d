@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:07:21 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 15:13:04 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:41:04 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ float	alloc_pi(t_cube *cube)
 
 void	get_size_square(t_cube *cube)
 {
-	int	i;
-
 	cube->mlx->squaret = cube->largestl * cube->nline;
-	i = cube->mlx->squaret / cube->nline;
 	/*squax = cube->mlx->win_sx / i;
 	squay = cube->mlx->win_sy / cube->nline;*/
 	squax = Csx;

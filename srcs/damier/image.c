@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:24:23 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:25:31 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:31:11 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,6 @@ int	render(t_cube *cube)
 		cpixely = posy;
 	}
 	update_posx_y(cube);
-	if (cube->mlx->mapdone == 0)
-	{
-		cube->mlx->mapdone = 1;
-		print_ver_line(cube);
-	}
 	if (cube->chara_move == 1)
 	{
 		cube->chara_move = 0;

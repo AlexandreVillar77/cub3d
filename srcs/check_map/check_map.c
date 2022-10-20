@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:32:31 by thbierne          #+#    #+#             */
-/*   Updated: 2022/09/15 09:39:24 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:42:58 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	check_middle(char **map, int *player)
 	int	y;
 
 	i = 1;
+	y = 0;
 	while (map[i + 1])
 	{
 		if (check_middle_2(map, player, i, y) == 1)

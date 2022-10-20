@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:59:19 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/20 17:22:12 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:51:33 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,9 @@ void	color_pixel(uint8_t *pixel, uint8_t *color)
 	pixel[3] = color[3];
 }
 
-void	draw_back(t_img **backg, t_cube *cube, uint8_t *ceil, uint8_t *floor)
+void	draw_back(t_img **backg, uint8_t *ceil, uint8_t *floor)
 {
 	int		i;
-	int		x;
 	int		a;
 
 	i = 0;
@@ -166,7 +165,7 @@ t_img	*dra_b(t_cube *cube)
 	floor[3] = 0;
 	//printf("%hhu , %hhu, %hhu, %hhu \n", floor[0], floor[1], floor[2], floor[3]);
 	backg = init_backg(cube);
-	draw_back(&backg, cube, ceil, floor);
+	draw_back(&backg, ceil, floor);
 	free (ceil);
 	free (floor);
 	return (backg);
@@ -178,7 +177,6 @@ t_img	*dra_b(t_cube *cube)
 void	print_ver_line(t_cube *cube)
 {
 	t_ddd	*dd;
-	int		x;
 	t_ray	*ray;
 	float	pa;
 	float	goal;

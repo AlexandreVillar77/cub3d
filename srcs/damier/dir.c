@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:24:50 by avillar           #+#    #+#             */
-/*   Updated: 2022/09/26 13:26:03 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:46:08 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	print_o_line(t_cube *cube, t_img **line)
 {
 	int		x;
 	int		y;
-	int		i;
 
 	y = (cube->mlx->chara->sy / 2);
 	x = (cube->mlx->chara->sx / 2);

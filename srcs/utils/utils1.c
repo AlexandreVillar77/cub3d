@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:11:44 by thbierne          #+#    #+#             */
-/*   Updated: 2022/09/16 09:44:22 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:50:17 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*remove_rtnl(char *src)
 	return (rtn);
 }
 
-char	*add_one_char(char *src, int toadd, char c)
+char	*add_one_char(char *src, char c)
 {
 	int		i;
 	int		x;

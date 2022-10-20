@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:17:09 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:34:20 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:49:15 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_ray	*ray_casting(t_cube *cube, float pa)
 		return (NULL);
 	degree2 = pa * 180 / pi;
 	init_t_ray(ray, pa, cube);
-	detect_wall(ray, cube, pa);
+	detect_wall(ray, cube);
 	degree1 = degree2 - cube->mlx->chara->p_per[0];
 	degree2 = cube->mlx->chara->p_per[1] - degree2;
 	if (degree2 < degree1)
@@ -48,7 +48,7 @@ t_ray	*ray_casting(t_cube *cube, float pa)
 	return (ray);
 }
 
-void	detect_wall(t_ray *ray, t_cube *cube, float pa)
+void	detect_wall(t_ray *ray, t_cube *cube)
 {
 	int x;
 	int y;
@@ -60,11 +60,11 @@ void	detect_wall(t_ray *ray, t_cube *cube, float pa)
 	if (y < cube->nline && x < cube->largestl)
 		if (x < ft_strlen(cmap[y]))
 			if (cmap[y][x] == '0' || cmap[y][x] == 'N' || cmap[y][x] == 'W' || cmap[y][x] == 'S' || cmap[y][x] == 'E')
-				check_ray(ray, cube, pa);
+				check_ray(ray, cube);
 	return;
 }
 
-void	check_ray(t_ray *ray, t_cube *cube, float pa)
+void	check_ray(t_ray *ray, t_cube *cube)
 {
 	double 	dist_x;
 	double 	dist_y;

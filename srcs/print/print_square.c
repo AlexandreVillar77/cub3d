@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 09:56:43 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 16:57:14 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:42:13 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	img_pix_put(t_img **img, int x, int y, int color, t_cube *cube)
 
 void	img_rotate_character(t_cube *cube, int keysim)
 {
-	t_ray *ray;
-
 	cube->chara_move = 1;
 	if (keysim == DF)
 	{
@@ -95,14 +93,16 @@ void	img_rotate_character(t_cube *cube, int keysim)
 			cpixely += (int)(cube->mlx->chara->pdy * 1);
 		}*/
 	}
-	else if (keysim == D)
-	{
-		
-	}
 	else if (keysim == A)
-	{
-		
-	}
+    {
+	    cpixely -= (int)(cube->mlx->chara->pdx * 3);
+        cpixelx -= (int)(cube->mlx->chara->pdy * 3);
+    }
+    else if (keysim == D)
+    {
+        cpixely += (int)(cube->mlx->chara->pdx * 3);
+        cpixelx += (int)(cube->mlx->chara->pdy * 3);
+    }
 	else
 		cube->chara_move = 0;
 	/*calcul_plan_chara(cube);

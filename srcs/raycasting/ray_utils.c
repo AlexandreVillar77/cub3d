@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:03:31 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 11:29:45 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:49:37 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_t_ray(t_ray *ray, float pa, t_cube *cube)
 	ray->perpwdist = 0;
 }
 
-void	return_side(t_cube *cube, t_ray *ray)
+void	return_side(t_ray *ray)
 {
 	if (ray->side == 0)
 	{

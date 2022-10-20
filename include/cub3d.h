@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:07:32 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:50:25 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,12 +197,12 @@ void	img_pix_put(t_img **img, int x, int y, int color, t_cube *cube);
 
 // ray casting
 t_ray	*ray_casting(t_cube *cube, float pa);
-void	detect_wall(t_ray *ray, t_cube *cube, float pa);
+void	detect_wall(t_ray *ray, t_cube *cube);
 
 void	init_t_ray(t_ray *ray, float pa, t_cube *cube);
-void	return_side(t_cube *cube, t_ray *ray);
+void	return_side(t_ray *ray);
 void	calcul_plan_chara(t_cube *cube);
-void	check_ray(t_ray *ray, t_cube *cube, float pa);
+void	check_ray(t_ray *ray, t_cube *cube);
 void	check_wall_y(t_ray *ray, t_cube *cube, int x, int y);
 void	check_wall_x(t_ray *ray, t_cube *cube, int x, int y);
 void	calcul_eucli(t_ray *ray, t_cube *cube, int i);
@@ -212,7 +212,7 @@ void	alloc_delta(t_ray *ray, t_cube *cube, int i);
 /*	utils	*/
 
 //utils1.c
-char	*add_one_char(char *src, int toadd, char c);
+char	*add_one_char(char *src, char c);
 char	*remove_rtnl(char *src);
 int		get_tab_ylen(char **str, t_cube *cube);
 void	tab_xy(t_cube *cube);
@@ -262,7 +262,7 @@ int		check_if_set(t_cube *cube);
 
 //map_to_tab.c
 int		check_for_wp(char c);
-int		read_keep(int fd, char **tab, int x, t_cube *cube);
+int		read_keep(int fd, t_cube *cube);
 
 void    print_ver_line(t_cube *cube);
 

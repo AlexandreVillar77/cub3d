@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:20:18 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/20 13:14:19 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:45:51 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ char	*reset_rtn(char *rtn)
 
 char	*skip(int fd)
 {
-	int		i;
 	int		x;
 	char	buf;
 	char	*rtn;
 
-	i = 0;
 	x = 1;
 	rtn = malloc(sizeof(char));
 	while (x > 0)
@@ -61,14 +59,11 @@ char	*skip(int fd)
 
 char	*map_to_str(int fd)
 {
-	int		i;
 	int		x;
 	char	buf;
 	char	*rtn;
-	char	*keep;
 
 	rtn = skip(fd);
-	i = 0;
 	x = 1;
 	while (x > 0)
 	{
@@ -81,7 +76,7 @@ char	*map_to_str(int fd)
 	return (rtn);
 }
 
-int	read_keep(int fd, char **tab, int x, t_cube *cube)
+int	read_keep(int fd, t_cube *cube)
 {
 	char	buf;
 	int		j;
@@ -148,7 +143,6 @@ int	get_n_line(char **map)
 
 char	**malloc_lines(char **dest, int l, int n)
 {
-	int	i;
 	int	y;
 
 	y = 0;
@@ -170,6 +164,7 @@ char **put_space(char **map, int l, int n)
 	char **dest;
 
 	y = 0;
+	dest = NULL;
 	dest = malloc_lines(dest, l, n);
 	while (y < n)
 	{
