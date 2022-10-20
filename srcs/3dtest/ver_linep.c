@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:59:19 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/20 15:29:54 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:22:12 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,14 +129,14 @@ void	draw_back(t_img **backg, t_cube *cube, uint8_t *ceil, uint8_t *floor)
 
 void	draw_ddd(t_ddd *dd, t_cube *cube, t_ray *ray)
 {
-	//if (ray->side == 1)
+	if (ray->side == 1)
 		draw_north(&dd, cube, ray, get_colors("255", "255", "255"));
-	/*else if (ray->side == 2)
-		(draw_west(&dd, cube, ray));
+	else if (ray->side == 2)
+		(draw_west(&dd, cube, ray, get_colors("255", "87", "177")));
 	else if (ray->side == 3)
-		(draw_south(&dd, cube, ray));
+		(draw_south(&dd, cube, ray, get_colors("0", "0", "0")));
 	else if (ray->side == 4)
-		(draw_east(&dd, cube, ray));*/
+		(draw_east(&dd, cube, ray, get_colors("176", "0", "252")));
 }
 
 int		rcint(char **s, int i)
@@ -182,8 +182,7 @@ void	print_ver_line(t_cube *cube)
 	t_ray	*ray;
 	float	pa;
 	float	goal;
-
-
+	
 	dd = NULL;
 	if (!cube->dd)
 	{
@@ -199,13 +198,9 @@ void	print_ver_line(t_cube *cube)
 	goal = cube->mlx->chara->pa + (step * (ddwin_s / 2));
 	cube->dd->backg = dra_b(cube);
 	calcul_plan_chara(cube);
-	while (pa < goal)
+	while (pa < goal - step)
 	{
 		ray = ray_casting(cube, pa);
-		/*if (ray->side == 1 || ray->side == 3)
-			printf("x:%i y:%i\n", ray->pos_rayy[0], ray->pos_rayy[1]);
-		else
-			printf("x:%i y:%i\n", ray->pos_rayx[0], ray->pos_rayx[1]);*/
 		if (!ray)
 			exit (EXIT_FAILURE);
 		if (ray->eucli == -1)

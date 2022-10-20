@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_calcul.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:17:09 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 14:47:44 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:25:22 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_ray	*ray_casting(t_cube *cube, float pa)
 	degree1 = (float)((degree1 * (float)pi) / 180);
 	ray->perpwdist = ray->eucli * sin(degree1);
 	//ray->perpwdist *= 5;
-	//ray->perpwdist = (int)(floor(ray->perpwdist + 0.5));
+	ray->perpwdist = (int)(floor(ray->perpwdist + 0.5));
 	//printf("\nside:%d\n", ray->side);
 	//printf("eucli:%f\n", ray->eucli);
 	//printf("perpwdist:%f  ", ray->perpwdist);
@@ -55,8 +55,10 @@ void	detect_wall(t_ray *ray, t_cube *cube, float pa)
 
 	x = cpixelx / (int)squax;
 	y = cpixely / (int)squay;
-	if (cmap[y][x] == '0' || cmap[y][x] == 'N' || cmap[y][x] == 'W' || cmap[y][x] == 'S' || cmap[y][x] == 'E')
-		check_ray(ray, cube, pa);
+	if (y < cube->nline)
+		if (x <= ft_strlen(cmap[y]))
+			if (cmap[y][x] == '0' || cmap[y][x] == 'N' || cmap[y][x] == 'W' || cmap[y][x] == 'S' || cmap[y][x] == 'E')
+				check_ray(ray, cube, pa);
 	return;
 }
 

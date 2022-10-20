@@ -6,11 +6,11 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:48:10 by thbierne          #+#    #+#              #
-#    Updated: 2022/10/20 15:41:19 by avillar          ###   ########.fr        #
+#    Updated: 2022/10/20 12:46:09 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
+NAME = Cub3d
 
 SRCS =	srcs/cub3d.c								\
 		srcs/print/get_size.c						\

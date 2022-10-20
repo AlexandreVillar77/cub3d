@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:49:30 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 15:21:58 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 16:06:44 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char **argv)
 	//cmap = put_space(cmap, get_largest_l(cmap), get_n_line(cmap));
 	tab_xy(cube);
 	//print_map(cube);
+	if (check_map(cube->map) == 1)
+		return (0);
 	cube->mlx = init_ml();
 	get_size_square(cube);
 	cube->dd = init_ddd(cube);
