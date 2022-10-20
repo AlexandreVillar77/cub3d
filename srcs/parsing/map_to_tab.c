@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:20:18 by avillar           #+#    #+#             */
-/*   Updated: 2022/09/16 09:43:39 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:14:19 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,92 @@ int	read_keep(int fd, char **tab, int x, t_cube *cube)
 	if (str)
 		free (str);
 	cube->nline = get_tab_ylen(cmap, cube);
+	//alloc_size_texture(cube);
 	return (0);
+}
+
+int	get_largest_l(char **map)
+{
+	int	i;
+	int	y;
+	int max;
+
+	y = 0;
+	max = 0;
+	while (map[y])
+	{
+		if (i > max)
+			max = i;
+		i = 0;
+		while (map[y][i])
+			i++;
+		y++;
+	}
+	return (max);
+}
+
+int	get_n_line(char **map)
+{
+	int	i;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		i = 0;
+		while (map[y][i])
+			i++;
+		y++;
+	}
+	return (y);
+}
+
+char	**malloc_lines(char **dest, int l, int n)
+{
+	int	i;
+	int	y;
+
+	y = 0;
+	dest = malloc(sizeof(char *) * (n + 1));
+	if (!dest)
+		exit(EXIT_FAILURE);
+	while (y < n)
+	{
+		dest[y] = malloc(sizeof(char) * (l + 2));
+		y++;
+	}
+	return (dest);
+}
+
+char **put_space(char **map, int l, int n)
+{
+	int	y;
+	int	i;
+	char **dest;
+
+	y = 0;
+	dest = malloc_lines(dest, l, n);
+	while (y < n)
+	{
+		i = 0;
+		while (map[y][i] && map[y][i] != '\n')
+		{
+			dest[y][i] = map[y][i];
+			i++;
+		}
+		if (i < l)
+		{
+			while (i < l - 1)
+			{
+				dest[y][i] = ' ';
+				i++;
+			}
+			dest[y][i - 1] = '\n';
+			dest[y][i] = '\0'; 
+		}
+		y++;
+	}
+	dest[y] = 0;
+	//free(map);
+	return (dest);
 }

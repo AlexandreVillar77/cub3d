@@ -6,11 +6,11 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:48:10 by thbierne          #+#    #+#              #
-#    Updated: 2022/10/13 16:14:18 by avillar          ###   ########.fr        #
+#    Updated: 2022/10/20 15:41:19 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3d
+NAME = cub3D
 
 SRCS =	srcs/cub3d.c								\
 		srcs/print/get_size.c						\
@@ -34,12 +34,15 @@ SRCS =	srcs/cub3d.c								\
 		srcs/utils/utils1.c							\
 		srcs/utils/utils2.c							\
 		srcs/3dtest/ver_linep.c						\
+		srcs/3dtest/draw_wall.c						\
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
+
+FSAN = -g -fsanitize=address
 
 LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 

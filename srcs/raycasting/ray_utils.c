@@ -3,140 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 10:18:48 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/06 11:40:13 by thbierne         ###   ########.fr       */
+/*   Created: 2022/10/13 14:03:31 by thbierne          #+#    #+#             */
+/*   Updated: 2022/10/20 11:29:45 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	init_t_ray(t_ray *x, t_ray *y, t_cube *cube)
+void	init_t_ray(t_ray *ray, float pa, t_cube *cube)
 {
-	x->x = cpixelx;
-	x->y = cpixely;
-	x->eucli = -1;
-	x->side = 0;
-	x->delta_x = -1;
-	x->delta_y = -1;
-	x->sidedist_x = -1;
-	x->sidedist_y = -1;
-	x->nbr_delta = -1;
-	y->x = cpixelx;
-	y->y = cpixely;
-	y->eucli = -1;
-	y->side = 1;
-	y->delta_x = -1;
-	y->delta_y = -1;
-	y->sidedist_x = -1;
-	y->sidedist_y = -1;
-	y->nbr_delta = -1;
+	ray->pos_rayx[0] = cpixelx;
+	ray->pos_rayx[1] = cpixely;
+	ray->pos_rayy[0] = cpixelx;
+	ray->pos_rayy[1] = cpixely;
+	ray->pdx = cos(pa) * -1;
+	ray->pdy = sin(pa) * -1;
+	ray->nbr_delta[0] = -1;
+	ray->nbr_delta[1] = -1;
+	ray->delta[0] = -1;
+	ray->delta[1] = -1;
+	ray->sidedist[0] = -1;
+	ray->sidedist[1] = -1;
+	ray->eucli = -1;
+	ray->side = 0;
+	ray->perpwdist = 0;
 }
 
-void	calcul_sidedist_y(t_ray *y, t_cube *cube, int mode)
+void	return_side(t_cube *cube, t_ray *ray)
 {
-	int	diff_x;
-	int	diff_y;
-
-	if (mode == 0)
+	if (ray->side == 0)
 	{
-		diff_x = y->x - cpixelx;
-		diff_y = y->y - cpixely;
-		if (diff_x < 0)
-			diff_x *= -1;
-		if (diff_y < 0)
-			diff_y *= -1;
-		y->sidedist_y = (diff_x * diff_x) + (diff_y * diff_y);
-		y->sidedist_y = sqrtf(y->sidedist_y);
+		if (ray->pdx > 0)
+			ray->side = 2;
+		else
+			ray->side = 4;
 	}
-	else
+	else if (ray->side == 1)
 	{
-		y->sidedist_y = cpixely - y->y;
+		if (ray->pdy > 0)
+			ray->side = 3;
+		else
+			ray->side = 1;
 	}
 }
 
-void	calcul_delta_y(t_ray *y, t_cube *cube)
+void	calcul_plan_chara(t_cube *cube)
 {
-	int	diff_x;
-	int	diff_y;
-	
-	diff_x = y->x - cpixelx;
-	diff_y = y->y - cpixely;
-	if (diff_x < 0)
-		diff_x *= -1;
-	if (diff_y < 0)
-		diff_y *= -1;
-	y->delta_y = (diff_x * diff_x) + (diff_y * diff_y);
-	y->delta_y = sqrtf(y->delta_y);
-	y->delta_y -= y->sidedist_y;
-}
-
-void	calcul_sidedist_x(t_ray *x, t_cube *cube, int mode)
-{
-	int	diff_x;
-	int	diff_y;
-
-	if (mode == 0)
-	{
-		diff_y = x->y - cpixely;
-		diff_x = x->x - cpixelx;
-		if (diff_y < 0)
-			diff_y *= -1;
-		if (diff_x < 0)
-			diff_x *= -1;
-		x->sidedist_x = (diff_x * diff_x) + (diff_y * diff_y);
-		x->sidedist_x = sqrtf(x->sidedist_x);
-	}
-	else
-		x->sidedist_x = cpixelx - x->x;
-}
-
-void	calcul_delta_x(t_ray *x, t_cube *cube)
-{
-	int	diff_x;
-	int	diff_y;
-	
-	diff_y = x->y - cpixely;
-	diff_x = x->x - cpixelx;
-	if (diff_x < 0)
-		diff_x *= -1;
-	if (diff_y < 0)
-		diff_y *= -1;
-	x->delta_x = (diff_x * diff_x) + (diff_y * diff_y);
-	x->delta_x = sqrtf(x->delta_x);
-	x->delta_x -= x->sidedist_x;
-}
-
-t_ray	*return_first_ray(t_ray *x, t_ray *y)
-{
-	if (x->eucli < y->eucli && x->eucli != -1 && x->y <= winH)
-	{
-		x->delta_y = y->delta_y;
-		x->sidedist_y = y->sidedist_y;
-		free(y);
-		return (x);
-	}
-	else if (y->eucli != -1 && y->x <= winW)
-	{
-		y->delta_x = x->delta_x;
-		y->sidedist_x = x->sidedist_x;
-		free(x);
-		return (y);
-	}
-	else if (y->eucli == -1)
-	{
-		x->delta_y = y->delta_y;
-		x->sidedist_y = y->sidedist_y;
-		free(y);
-		return (x);
-	}
-	else if (x->eucli == -1)
-	{
-		y->delta_x = x->delta_x;
-		y->sidedist_x = x->sidedist_x;
-		free(x);
-		return (y);
-	}
-	return (NULL);
+	cube->mlx->chara->p_per[0] = cube->mlx->chara->pa * 180 / pi;
+	cube->mlx->chara->p_per[1] = cube->mlx->chara->p_per[0] + 90;
+	cube->mlx->chara->p_per[0] -= 90;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_size.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:07:21 by thbierne          #+#    #+#             */
-/*   Updated: 2022/09/21 14:28:27 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:13:04 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	get_size_square(t_cube *cube)
 
 	cube->mlx->squaret = cube->largestl * cube->nline;
 	i = cube->mlx->squaret / cube->nline;
-	squax = cube->mlx->win_sx / i;
-	squay = cube->mlx->win_sy / cube->nline;
+	/*squax = cube->mlx->win_sx / i;
+	squay = cube->mlx->win_sy / cube->nline;*/
+	squax = Csx;
+	squay = Csx;
 	cube->mlx->chara = init_char(cube);
 	cube->mlx->chara->pa = alloc_pi(cube);
 	cube->mlx->chara->pdx = cos(cube->mlx->chara->pa) * 10;

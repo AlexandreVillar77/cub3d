@@ -6,13 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 09:56:43 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/13 15:04:55 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:38:25 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int		check_wall(t_cube *cube)
+/*int		check_wall(t_cube *cube)
 {
 	if (cmap[cube->mlx->chara->pixely / (int)squay][cube->mlx->chara->pixelx / (int)squax] == '1')
 		return (1);
@@ -27,7 +27,7 @@ int		check_wall(t_cube *cube)
 			return (1);
 	else
 		return (0);
-}
+}*/
 
 void	img_pix_put(t_img **img, int x, int y, int color, t_cube *cube)
 {
@@ -54,12 +54,12 @@ void	img_pix_put(t_img **img, int x, int y, int color, t_cube *cube)
 	}
 }
 
-void	img_rotate_character(t_img **img, t_cube *cube, int keysim)
+void	img_rotate_character(t_cube *cube, int keysim)
 {
 	t_ray *ray;
-	//printf("\ntaillex:%f  tailley:%f\n", squax, squay);
+
 	cube->chara_move = 1;
-	if (keysim == D)
+	if (keysim == DF)
 	{
 		cube->mlx->chara->pa += 0.1;
 		if (cube->mlx->chara->pa > 2 * pi)
@@ -67,7 +67,7 @@ void	img_rotate_character(t_img **img, t_cube *cube, int keysim)
 		cube->mlx->chara->pdx = cos(cube->mlx->chara->pa) * 10;
 		cube->mlx->chara->pdy = sin(cube->mlx->chara->pa) * 10;
 	}
-	else if (keysim == A)
+	else if (keysim == GF)
 	{
 		cube->mlx->chara->pa -= 0.1;
 		if (cube->mlx->chara->pa < 0)
@@ -95,15 +95,20 @@ void	img_rotate_character(t_img **img, t_cube *cube, int keysim)
 			cpixely += (int)(cube->mlx->chara->pdy * 1);
 		}*/
 	}
+	else if (keysim == D)
+	{
+		
+	}
+	else if (keysim == A)
+	{
+		
+	}
 	else
 		cube->chara_move = 0;
+	/*calcul_plan_chara(cube);
 	ray = ray_casting(cube, cube->mlx->chara->pa);
-	/*printf("\nangle:%f\n", cube->mlx->chara->pa);
-	printf("before : pixelx=%i   pixely=%i\n", cube->mlx->chara->pixelx, cube->mlx->chara->pixely);
-	printf("axe x:%f    axe y:%f\n", cube->mlx->chara->pdx, cube->mlx->chara->pdy);
-	printf("ray->x=%i    ray->y=%i\neucli=%f\n", ray->x, ray->y, ray->eucli);
-	printf("ray->delta_x=%f  ray->sidedist_x=%f\n",ray->delta_x, ray->sidedist_x);
-	printf("ray->delta_y=%f  ray->sidedist_y%f\n", ray->delta_y, ray->sidedist_y);
-	printf("side=%i    nbr_delta=%i\n", ray->side, ray->nbr_delta);*/
-	//put_cast_hit(cube, ray->x, ray->y);
+	if (ray->side == 0)
+		put_cast_hit(cube, ray->pos_rayx[0], ray->pos_rayx[1]);
+	if (ray->side == 1)
+		put_cast_hit(cube, ray->pos_rayy[0], ray->pos_rayy[1]);*/
 }

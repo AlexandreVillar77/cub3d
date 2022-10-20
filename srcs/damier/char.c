@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:11:34 by avillar           #+#    #+#             */
-/*   Updated: 2022/09/26 15:58:30 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:27:03 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,73 +65,12 @@ t_chara	*init_char(t_cube *cube)
 		exit (EXIT_FAILURE);
 	chara->char_img->addr = mlx_get_data_addr(chara->char_img->mlx_img, &chara->char_img->bpp
 		, &chara->char_img->line_len, &chara->char_img->endian);
+	chara->char_img->pimg = NULL;
+	chara->pdx = 0;
+	chara->pdy = 0;
+	chara->pa = 0;
+	chara->p_per[0] = 0;
+	chara->p_per[1] = 0;
 	get_pos(chara, cube);
 	return (chara);
-}
-
-void	img_pix_put2(t_img **img, int x, int y, int color, t_cube *cube)
-{
-	char    *pixel;
-	float		px;
-	float		py;
-	int		o;
-
-	py = -1;
-	o = x;
-	/*while (++py < cube->mlx->chara->sy)
-	{
-		px = -1;
-		x = o;
-		while (++px < cube->mlx->chara->sx)
-		{
-   			pixel = (*img)->addr + ((y * (*img)->line_len + x * ((*img)->bpp / 8)));
-			*(int *)pixel = color;
-			x++;
-		}
-		y++;
-	}*/
-	//x = cube->mlx->chara->sx / 4;
-	//y = cube->mlx->chara->sy / 4;
-	py = - 1;
-	o = x;
-	while (++py < cube->mlx->chara->sy)
-	{
-		px =  - 1;
-		x = o;
-		while (++px < cube->mlx->chara->sx)
-		{
-   			pixel = (*img)->addr + ((y * (*img)->line_len + x * ((*img)->bpp / 8)));
-			*(int *)pixel = 0xf7d51;
-			x++;
-		}
-		y++;
-	}
-}
-
-void	update_posx_y(t_cube *cube)
-{
-	cube->mlx->chara->posx = cube->mlx->chara->pixelx / (int)squax;
-	cube->mlx->chara->posy = cube->mlx->chara->pixely / (int)squay;
-}
-
-void	print_chara(t_cube *cube)
-{
-	float	x;
-	float	y;
-	int	posy;
-	int	posx;
-
-	x = cube->mlx->chara->posx;
-	y = cube->mlx->chara->posy;
-	posx = (int)((x * squax) + squax / 3);
-	posy = (int)((y * squay) + squay / 3);
-	if (cpixelx == 0 && cpixely == 0)
-	{
-		cpixelx = posx;
-		cpixely = posy;
-	}
-	img_pix_put2(&cube->mlx->chara->char_img, 0, 0, 0x5f9ea0, cube);
-	print_o_line(cube, &cube->mlx->chara->char_img);
-	mlx_put_image_to_window(cube->mlx->mlx_ptr, cube->mlx->win_ptr, cube->mlx->chara->char_img->mlx_img, cpixelx, cpixely);
-	update_posx_y(cube);
 }

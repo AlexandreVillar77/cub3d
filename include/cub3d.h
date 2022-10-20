@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/14 15:15:22 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:35:29 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,16 @@
 # define winW 1200
 # define winH 1200
 # define Ppov 60
+# define Csx 100
+# define DF 65363
+# define GF 65361
 # define ddwin_s 1200
 # define Pov_2 (Ppov / 100) / 2
 # define rad_conv (pi / 180)
 # define Max_at ((squax / 2) / tan(30 * rad_conv))
-# define step (Ppov / 100) / 600
+# define step (60 * rad_conv) / 1200
+# define n_line get_n_line(cmap)
+# define max_p 4 * winW * winH
 
 typedef struct	s_cube t_cube;
 typedef struct	s_map t_map;
@@ -74,48 +79,51 @@ typedef struct	s_ray t_ray;
 
 struct s_ray
 {
-	float	eucli;
-	int		x;
-	int		y;
-	int		nbr_delta;
-	int		side;	// 0 si horizontal / 1 si vertical #le mur bien sur
-	float	delta_x; // pour aller d'un bloc a un autre sur l'axe x
-	float	delta_y; // pour aller d'un bloc a un autre sur l'axe y
-	float	sidedist_x; // dist du joueur a la prochaine cas x
-	float	sidedist_y; // dist du joueur a la prochaine cas y
-	int		perpwdist; // dist pos joueur pour aller au mur mes en 
-//partant du map plane donc pour avoir un axe perpendiculaire   et eviter l'effet fisheye
+	double		eucli;
+	int			pos_rayx[2];	//coordonner impact rayon x (x,y)
+	int			pos_rayy[2];	//coordonner impact rayon y (x,y)
+	double		pdx;
+	double		pdy;
+	int			nbr_delta[2];	//nombre de distance delta parcouru (0 pour x, 1 pour y)
+	int			side;			// 0 si horizontal / 1 si vertical #le mur bien sur
+	double		delta[2];		//distance delta parcouru (0 pour x, 1 pour y)
+	double		sidedist[2];	//distance sidedist parcouru (0 pour x, 1 pour y)
+	double		perpwdist;
 };
 
 struct s_ddd
 {
-	void	*win_ptr;
-	int		winh;
-	int		winw;
-	int		index;
-	t_img	*ml_img;
-	t_img	*backg;
+    void    *win_ptr;
+    int        winh;
+    int        winw;
+    int        index;
+//    t_img    *ml_img;
+    t_img    *backg;
 };
 
 struct s_img
 {
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	uint8_t	*pimg;
+    void	*mlx_img;
+    char	*addr;
+    int		bpp;
+    int		line_len;
+    int		endian;
+    uint8_t	*pimg;
 };
 
 struct s_map
 {
-	char	**map;
-	char	*NO;
-	char	*EA;
-	char	*SO;
-	char	*WE;
-	char	**Fcolor;
-	char	**Cellcolor;
+    char    **map;
+    char    *NO;
+    char    *EA;
+    char    *SO;
+    char    *WE;
+	int		var_NO[2];
+	int		var_EA[2];
+	int		var_SO[2];
+	int		var_WE[2];
+    char    **Fcolor;
+    char    **Cellcolor;
 };
 
 struct s_chara
@@ -125,6 +133,7 @@ struct s_chara
 	float	sy;
 	int		pixelx;
 	int		pixely;
+	float	p_per[2];
 	int		posx;	//position du joueur par carre dans la map axe x
 	int		posy;	//position du joueur par carre dans la map axe Y
 	char	dir;	//direction du joueur a la creation
@@ -157,6 +166,7 @@ struct s_cube
 	int		chara_move;	//0 = le joueur ne bouge pas; 1 = deplacement joueur
 	t_mlx	*mlx;
 	t_map	*map;
+	t_ddd	*dd;
 };
 
 /*	check debut de programme	*/
@@ -176,7 +186,7 @@ int		print_error_player(int player);
 // player related
 void	print_chara(t_cube *cube);
 t_chara	*init_char(t_cube *cube);
-void	img_rotate_character(t_img **img, t_cube *cube, int keysim);
+void	img_rotate_character(t_cube *cube, int keysim);
 void	print_o_line(t_cube *cube, t_img **line);
 
 // affichage carre
@@ -187,19 +197,17 @@ void	img_pix_put(t_img **img, int x, int y, int color, t_cube *cube);
 
 // ray casting
 t_ray	*ray_casting(t_cube *cube, float pa);
-int		check_ray_y(t_ray *x, t_ray *y, t_cube *cube, float pa);
-int		check_y(t_ray *x, t_ray *y, t_cube *cube, float pa);
-int		check_ray_y2(t_ray *x, t_ray *y, t_cube *cube, float pa);
-int		check_ray_x(t_ray *x, t_ray *y, t_cube *cube, float pa);
-int		check_ray_x2(t_ray *x, t_ray *y, t_cube *cube, float pa);
-int		check_x_ray(t_ray *x, t_ray *y, t_cube *cube, float pa);
+void	detect_wall(t_ray *ray, t_cube *cube, float pa);
 
-void	init_t_ray(t_ray *x, t_ray *y, t_cube *cube);
-void	calcul_sidedist_y(t_ray *y, t_cube *cube, int mode);
-void	calcul_delta_y(t_ray *y, t_cube *cube);
-void	calcul_sidedist_x(t_ray *x, t_cube *cube, int mode);
-void	calcul_delta_x(t_ray *x, t_cube *cube);
-t_ray	*return_first_ray(t_ray *x, t_ray *y);
+void	init_t_ray(t_ray *ray, float pa, t_cube *cube);
+void	return_side(t_cube *cube, t_ray *ray);
+void	calcul_plan_chara(t_cube *cube);
+void	check_ray(t_ray *ray, t_cube *cube, float pa);
+void	check_wall_y(t_ray *ray, t_cube *cube, int x, int y);
+void	check_wall_x(t_ray *ray, t_cube *cube, int x, int y);
+void	calcul_eucli(t_ray *ray, t_cube *cube, int i);
+void	alloc_sidedist(t_ray *ray, t_cube *cube, int i);
+void	alloc_delta(t_ray *ray, t_cube *cube, int i);
 
 /*	utils	*/
 
@@ -216,11 +224,8 @@ int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 /*	image.c	*/
 
 int		handle_keypress(int keysym, t_cube *cube);
-void	make_img(t_cube *cube);
-void	render_background(t_cube *cube, int color);
 int		render(t_cube *cube);
 void	ml_loop(t_cube *cube);
-void	put_cast_hit(t_cube *cube, int x, int y);
 
 /* struct related */
 
@@ -259,10 +264,24 @@ int		check_if_set(t_cube *cube);
 int		check_for_wp(char c);
 int		read_keep(int fd, char **tab, int x, t_cube *cube);
 
+void    print_ver_line(t_cube *cube);
 
 
+//test 3d
 
-void	print_ver_line(t_cube *cube);
+void	color_pixel(uint8_t *pixel, uint8_t *color);
+void	draw_north(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col);
+uint8_t	*get_colors(char *s1, char *s2, char *s3);
+
+
+//test
+
+char	**malloc_lines(char **dest, int l, int n);
+char **put_space(char **map, int l, int n);
+int	get_n_line(char **map);
+int	get_largest_l(char **map);
+int	check_if_here(t_cube *cube);
+t_ddd	*init_ddd(t_cube *cube);
 
 
 # endif

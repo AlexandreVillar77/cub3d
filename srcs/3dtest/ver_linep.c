@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:59:19 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/14 15:25:06 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:29:54 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_ddd	*init_ddd(t_cube *cube)
 	dd->winh = ddwin_s;
 	dd->index = 0;
 	dd->win_ptr = mlx_new_window(cube->mlx->mlx_ptr, dd->winw, dd->winh, "3d test");
-	dd->ml_img = malloc(sizeof(t_img));
-	dd->ml_img->mlx_img = mlx_new_image(cube->mlx->mlx_ptr, dd->winw, dd->winh);
-	dd->ml_img->addr = mlx_get_data_addr(dd->ml_img->mlx_img, &dd->ml_img->bpp
-		, &dd->ml_img->line_len, &dd->ml_img->endian);
-	dd->backg = malloc(sizeof(t_img));
+	dd->backg = NULL;
+//	dd->ml_img = malloc(sizeof(t_img));
+//	dd->ml_img->mlx_img = mlx_new_image(cube->mlx->mlx_ptr, dd->winw, dd->winh);
+//	dd->ml_img->addr = mlx_get_data_addr(dd->ml_img->mlx_img, &dd->ml_img->bpp
+//		, &dd->ml_img->line_len, &dd->ml_img->endian);
 	return (dd);
 }
 
@@ -86,12 +86,18 @@ char	*convertcol(int nb, int nbx, int nbr)
 	return (tmp);
 }
 
-void	init_backg(t_ddd **dd, t_cube *cube)
+t_img	*init_backg(t_cube *cube)
 {
-	(*dd)->backg->mlx_img = mlx_new_image(cube->mlx->mlx_ptr, (*dd)->winw, (*dd)->winh);
-	(*dd)->backg->addr = mlx_get_data_addr((*dd)->backg->mlx_img, &(*dd)->backg->bpp
-		, &(*dd)->backg->line_len, &(*dd)->backg->endian);
-	(*dd)->backg->pimg = (uint8_t *)(*dd)->backg->addr;
+	t_img *backg;
+
+	backg = malloc(sizeof(t_img));
+	if (!backg)
+		exit (EXIT_FAILURE);
+	backg->mlx_img = mlx_new_image(cube->mlx->mlx_ptr, ddwin_s, ddwin_s);
+	backg->addr = mlx_get_data_addr(backg->mlx_img, &backg->bpp
+		, &backg->line_len, &backg->endian);
+	backg->pimg = (uint8_t *)backg->addr;
+	return (backg);
 }
 
 void	color_pixel(uint8_t *pixel, uint8_t *color)
@@ -102,44 +108,35 @@ void	color_pixel(uint8_t *pixel, uint8_t *color)
 	pixel[3] = color[3];
 }
 
-void	draw_back(t_ddd **dd, t_cube *cube, uint8_t *ceil, int floor)
+void	draw_back(t_img **backg, t_cube *cube, uint8_t *ceil, uint8_t *floor)
 {
 	int		i;
 	int		x;
 	int		a;
 
 	i = 0;
-	a = 4 * (*dd)->winh * (*dd)->winh;
+	a = max_p;
+	//printf("a = %d\n", a);
 	while (i < a)
 	{
 		if (i < (a / 2))
-			color_pixel((*dd)->backg->pimg + i, ceil);
+			color_pixel((*backg)->pimg + i, ceil);
+		if (i > (a / 2))
+			color_pixel((*backg)->pimg + i, floor);
 		i += 4;
 	}
-	/*while (++i < (*dd)->winh)
-	{
-		x = -1;
-		while (++x < (*dd)->winw)
-		{
-			pixel = (*dd)->backg->addr + ((i * (*dd)->backg->line_len + x * ((*dd)->backg->bpp / 8)));
-			*(int *)pixel = floor;
-		}
-	}*/
 }
 
 void	draw_ddd(t_ddd *dd, t_cube *cube, t_ray *ray)
 {
-	float		h;
-	int			y;
-	int			i;
-
-	y = ddwin_s / 2;
-	i = -1;
-	h = ddwin_s * Max_at / ray->eucli / 2;
-	/*while (++i)
-	{
-
-	}*/
+	//if (ray->side == 1)
+		draw_north(&dd, cube, ray, get_colors("255", "255", "255"));
+	/*else if (ray->side == 2)
+		(draw_west(&dd, cube, ray));
+	else if (ray->side == 3)
+		(draw_south(&dd, cube, ray));
+	else if (ray->side == 4)
+		(draw_east(&dd, cube, ray));*/
 }
 
 int		rcint(char **s, int i)
@@ -150,27 +147,33 @@ int		rcint(char **s, int i)
 	return (rtn);
 }
 
-void	dra_b(t_ddd *dd, t_cube *cube)
+t_img	*dra_b(t_cube *cube)
 {
-	char *ceilc;
-	char *floorc;
-	uint8_t *test;
+	uint8_t *ceil;
+	uint8_t	*floor;
+	t_img	*backg;
 
-	test = malloc(sizeof(uint8_t) * 4);
-	test[0] = rcint(cmcc, 1);
-	test[1] = rcint(cmcc, 2);
-	test[2] = rcint(cmcc, 3);
-	test[3] = 0;
-	printf("color = %d\n", test[0]);
-	printf("color = %d\n", test[1]);
-	printf("color = %d\n", test[2]);
-//	printf("test = %d\n", test[0]);
-	ceilc = convertcol(rcint(cmcc, 1), rcint(cmcc, 2), rcint(cmcc, 3));
-	floorc = convertcol(rcint(cmfc, 1), rcint(cmfc, 2), rcint(cmfc, 3));
-	printf("colors = %s\n colors = %s\n", ceilc, floorc);
-	init_backg(&dd, cube);
-	draw_back(&dd, cube, test, floorc);
+	backg = NULL;
+	ceil = malloc(sizeof(uint8_t) * 4);
+	ceil[0] = rcint(cmcc, 3);
+	ceil[1] = rcint(cmcc, 2);
+	ceil[2] = rcint(cmcc, 1);
+	ceil[3] = 0;
+	floor = malloc(sizeof(uint8_t) * 4);
+	floor[0] = rcint(cmfc, 3);
+	floor[1] = rcint(cmfc, 2);
+	floor[2] = rcint(cmfc, 1);
+	floor[3] = 0;
+	//printf("%hhu , %hhu, %hhu, %hhu \n", floor[0], floor[1], floor[2], floor[3]);
+	backg = init_backg(cube);
+	draw_back(&backg, cube, ceil, floor);
+	free (ceil);
+	free (floor);
+	return (backg);
 }
+
+// faire une nouvelle image rien que pour les mur comme ca pas besoin de refaire le background a chaque fois
+//jsute les put to window a la fin a la suite pour eviter les latence.
 
 void	print_ver_line(t_cube *cube)
 {
@@ -180,30 +183,41 @@ void	print_ver_line(t_cube *cube)
 	float	pa;
 	float	goal;
 
-int	i;
 
-i = 0;
-while (i < 3)
-{
-	printf("cmfc[%d] = %s\n", i, cmfc[i]);
-	i++;
-}
-	dd = init_ddd(cube);
-	pa = cube->mlx->chara->pa - Pov_2;
-	goal = cube->mlx->chara->pa + Pov_2;
-	if (!dd->backg->addr)
+	dd = NULL;
+	if (!cube->dd)
 	{
-		dra_b(dd, cube);
+		dd = init_ddd(cube);
+		cube->dd = dd;
 	}
-/*	while (pa < goal)
+	else if (cube->dd->backg)
+	{
+		mlx_destroy_image(cube->mlx->mlx_ptr, cube->dd->backg->mlx_img);
+		free (cube->dd->backg);
+	}
+	pa = cube->mlx->chara->pa - (step * (ddwin_s / 2));
+	goal = cube->mlx->chara->pa + (step * (ddwin_s / 2));
+	cube->dd->backg = dra_b(cube);
+	calcul_plan_chara(cube);
+	while (pa < goal)
 	{
 		ray = ray_casting(cube, pa);
-
-		if (ray->side == 0)
-			ray->perpwdist = (ray->sidedist_x - ray->delta_x) ;*/
-		/*pa += step;
-		dd->index++;
+		/*if (ray->side == 1 || ray->side == 3)
+			printf("x:%i y:%i\n", ray->pos_rayy[0], ray->pos_rayy[1]);
+		else
+			printf("x:%i y:%i\n", ray->pos_rayx[0], ray->pos_rayx[1]);*/
+		if (!ray)
+			exit (EXIT_FAILURE);
+		if (ray->eucli == -1)
+		{
+			free (ray);
+			break ;
+		}
+		draw_ddd(cube->dd, cube, ray);
+		pa += step;
+		cube->dd->index++;
 		free (ray);
-	}*/
-	mlx_put_image_to_window(cube->mlx->mlx_ptr, dd->win_ptr, dd->backg->mlx_img, 0, 0);
+	}
+	cube->dd->index = 0;
+	mlx_put_image_to_window(cube->mlx->mlx_ptr, cube->dd->win_ptr, cube->dd->backg->mlx_img, 0, 0);
 }
