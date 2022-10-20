@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:17:09 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:25:22 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:34:20 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	detect_wall(t_ray *ray, t_cube *cube, float pa)
 
 	x = cpixelx / (int)squax;
 	y = cpixely / (int)squay;
-	if (y < cube->nline)
-		if (x <= ft_strlen(cmap[y]))
+	if (y < 0 || x < 0)
+		return ;
+	if (y < cube->nline && x < cube->largestl)
+		if (x < ft_strlen(cmap[y]))
 			if (cmap[y][x] == '0' || cmap[y][x] == 'N' || cmap[y][x] == 'W' || cmap[y][x] == 'S' || cmap[y][x] == 'E')
 				check_ray(ray, cube, pa);
 	return;
