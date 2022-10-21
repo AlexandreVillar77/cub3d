@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:20:18 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 09:34:01 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:24:56 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,13 @@ int	read_keep(int fd, t_cube *cube)
 	char	*str;
 
 	j = 1;
-	str = malloc(sizeof(char));
-	str[0] = '\0';
 	while (j > 0)
 	{
 		j = read(fd, &buf, 1);
 		if (j == -1)
 			return (-1);
 		if (check_for_wp(buf) == 0)
-			if (manager(fd, buf, cube, str) == 1)
+			if (manager(fd, buf, cube) == 1)
 				return (1);
 		if (check_if_set(cube) == 0)
 			break ;

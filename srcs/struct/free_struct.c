@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:51:41 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/17 10:26:49 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:21:58 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	dest_mlx(t_cube *cube)
 {
 	mlx_destroy_display(cube->mlx->mlx_ptr);
+	free (cube->mlx->mlx_ptr);
 	free (cube->mlx);
 }
 
@@ -64,12 +65,23 @@ void	free_map(t_cube *cube)
 		free (cwe);
 	if (cube->map->map)
 		free_map_map(cube->map->map);
+	if (cube->mapls)
+		free (cube->mapls);
+}
+
+void	free_ddd(t_cube *cube)
+{
+	mlx_destroy_image(cube->mlx->mlx_ptr, cube->dd->backg->mlx_img);
+	free (cube->dd->backg);
+	free (cube->dd);
 }
 
 void	free_cube(t_cube *cube)
 {
 	free_map(cube);
-	//dest_mlx(cube);
+	free (cube->mlx->chara);
+	free_ddd(cube);
+	dest_mlx(cube);
 	free(cube->map);
 	free(cube);
 }

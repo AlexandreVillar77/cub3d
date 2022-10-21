@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:50:25 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:25:15 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ struct s_map
 
 struct s_chara
 {
-	t_img	*char_img;
 	float	sx;
 	float	sy;
 	int		pixelx;
@@ -256,8 +255,8 @@ int		parse_fc(int fd, t_cube *cube);
 int		parse_cellcolor(int fd, t_cube *cube);
 
 //skip_error.c
-int		manage_error(char c, char *str, int mode);
-int		manager(int fd, char c, t_cube *cube, char *str);
+int		manage_error(char c, int mode);
+int		manager(int fd, char c, t_cube *cube);
 int		check_if_set(t_cube *cube);
 
 //map_to_tab.c

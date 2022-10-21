@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:59:19 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/20 17:51:33 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:17:57 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,13 +129,13 @@ void	draw_back(t_img **backg, uint8_t *ceil, uint8_t *floor)
 void	draw_ddd(t_ddd *dd, t_cube *cube, t_ray *ray)
 {
 	if (ray->side == 1)
-		draw_north(&dd, cube, ray, get_colors("255", "255", "255"));
-	else if (ray->side == 2)
-		(draw_west(&dd, cube, ray, get_colors("255", "87", "177")));
-	else if (ray->side == 3)
 		(draw_south(&dd, cube, ray, get_colors("0", "0", "0")));
-	else if (ray->side == 4)
+	else if (ray->side == 2)
 		(draw_east(&dd, cube, ray, get_colors("176", "0", "252")));
+	else if (ray->side == 3)
+		draw_north(&dd, cube, ray, get_colors("255", "255", "255"));	
+	else if (ray->side == 4)
+		(draw_west(&dd, cube, ray, get_colors("255", "87", "177")));
 }
 
 int		rcint(char **s, int i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cardi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:07 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 09:34:50 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:26:05 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	parse_no(int fd, t_cube *cube)
 	int		i;
 
 	if (check_if_right(fd, "O ") == 1)
-		return (manage_error('N', NULL, 1));
+		return (manage_error('N', 1));
 	i = 1;
 	while (i > 0)
 	{
@@ -65,7 +65,7 @@ int	parse_so(int fd, t_cube *cube)
 	int		i;
 
 	if (check_if_right(fd, "O ") == 1)
-		return (manage_error('S', NULL, 1));
+		return (manage_error('S', 1));
 	i = 1;
 	while (i > 0)
 	{
@@ -91,7 +91,7 @@ int	parse_ea(int fd, t_cube *cube)
 	int		i;
 
 	if (check_if_right(fd, "A ") == 1)
-		return (manage_error('E', NULL, 1));
+		return (manage_error('E', 1));
 	i = 1;
 	while (i > 0)
 	{
@@ -117,7 +117,7 @@ int	parse_we(int fd, t_cube *cube)
 	int		i;
 
 	if (check_if_right(fd, "E ") == 1)
-		return (manage_error('W', NULL, 1));
+		return (manage_error('W', 1));
 	i = 1;
 	while (i > 0)
 	{

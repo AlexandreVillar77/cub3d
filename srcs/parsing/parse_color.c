@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 10:12:30 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 09:35:39 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:26:12 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parse_fc(int fd, t_cube *cube)
 	char	*cfc;
 
 	if (check_if_right(fd, " ") == 1)
-		return (manage_error('F', NULL, 1));
+		return (manage_error('F', 1));
 	i = 1;
 	while (i > 0)
 	{
@@ -67,7 +67,7 @@ int	parse_cellcolor(int fd, t_cube *cube)
 	char	*ccc;
 
 	if (check_if_right(fd, " ") == 1)
-		return (manage_error('C', NULL, 1));
+		return (manage_error('C', 1));
 	i = 1;
 	while (i > 0)
 	{

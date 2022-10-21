@@ -6,17 +6,16 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 09:52:10 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/14 13:53:36 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:24:47 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	manage_error(char c, char *str, int mode)
+int	manage_error(char c, int mode)
 {
 	if (mode == 0)
 	{
-		free (str);
 		printf("Error\n%c is not an authorised identifier\n", c);
 	}
 	else if (mode == 1)
@@ -24,7 +23,7 @@ int	manage_error(char c, char *str, int mode)
 	return (1);
 }
 
-int	manager(int fd, char c, t_cube *cube, char *str)
+int	manager(int fd, char c, t_cube *cube)
 {
 	if (c == 'N')
 		return (parse_no(fd, cube));
@@ -39,7 +38,7 @@ int	manager(int fd, char c, t_cube *cube, char *str)
 	else if (c == 'C')
 		return (parse_cellcolor(fd, cube));
 	else
-		return (manage_error(c, str, 0));
+		return (manage_error(c, 0));
 }
 
 int	check_if_set(t_cube *cube)
