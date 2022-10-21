@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_calcul.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:17:09 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:49:15 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 10:24:37 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void	check_ray(t_ray *ray, t_cube *cube)
 	double 	dist_y;
 	double	x;
 	double 	y;
+	int a;
+	int b;
+	int c;
+	int d;
 
 	x = cpixelx;
 	y = cpixely;
@@ -77,7 +81,42 @@ void	check_ray(t_ray *ray, t_cube *cube)
 	dist_y = fmod(cpixely, squay);
 	while (1)
 	{
-		if (dist_y >= squay || dist_y < 0)
+		if ((dist_y >= squay || dist_y <= 0) && (dist_x >= squax || dist_x <= 0))
+		{
+			a = y / squay;
+			b = (x + (ray->pdx * 3)) / squax;
+			c = y / squay;
+			d = (x - (ray->pdx * 3)) / squax;
+			if (cmap && cmap[a][b] == '1' && cmap[c][d] == '1')
+			{
+				if (dist_x == 0)
+					dist_x = (double)squax;
+				else if (dist_x == squax)
+					dist_x = 0;
+				else if (ray->pdx < 0)
+				{
+					dist_x = (double)(dist_x * -1);
+					dist_x = (double)(squax - dist_x);
+				}
+				else
+					dist_x = (double)(dist_x - squax);
+			}
+			else
+			{
+				if (dist_y == 0)
+					dist_y = (double)squay;
+				else if (dist_y == squay)
+					dist_y = 0;
+				else if (ray->pdy < 0)
+				{
+					dist_y = (double)(dist_y * -1);
+					dist_y = (double)(squay - dist_y);
+				}
+				else
+					dist_y = (double)(dist_y - squay);
+			}
+		}
+		if (dist_y >= squay || dist_y <= 0)
 		{
 			check_wall_y(ray, cube, x, y);
 			if (dist_y == 0)
@@ -92,7 +131,7 @@ void	check_ray(t_ray *ray, t_cube *cube)
 			else
 				dist_y = (double)(dist_y - squay);
 		}
-		else if (dist_x >= squax || dist_x < 0)
+		else if (dist_x >= squax || dist_x <= 0)
 		{
 			check_wall_x(ray, cube, x, y);
 			if (dist_x == 0)
@@ -109,7 +148,7 @@ void	check_ray(t_ray *ray, t_cube *cube)
 		}
 		if (ray->eucli != -1)
 		{
-			return_side(cube, ray);
+			return_side(ray);
 			break ;
 		}
 		dist_x += (double)ray->pdx;

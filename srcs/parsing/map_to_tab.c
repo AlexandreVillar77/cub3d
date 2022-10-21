@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:20:18 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/20 17:45:51 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 09:34:01 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*skip(int fd)
 		if (buf == '\n')
 			rtn = reset_rtn(rtn);
 		else
-			rtn = add_one_char(rtn, 1, buf);
+			rtn = add_one_char(rtn, buf);
 		if (buf == '1')
 			break ;
 	}
@@ -71,7 +71,7 @@ char	*map_to_str(int fd)
 		if (x < 0)
 			return (NULL);
 		if (x > 0)
-			rtn = add_one_char(rtn, 1, buf);
+			rtn = add_one_char(rtn, buf);
 	}
 	return (rtn);
 }

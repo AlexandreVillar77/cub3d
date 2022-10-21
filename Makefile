@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
+#    By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:48:10 by thbierne          #+#    #+#              #
-#    Updated: 2022/10/20 12:46:09 by avillar          ###   ########.fr        #
+#    Updated: 2022/10/21 09:36:59 by thbierne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3d
+NAME = cub3D
 
 SRCS =	srcs/cub3d.c								\
 		srcs/print/get_size.c						\
@@ -49,7 +49,7 @@ LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 all: libft/libft.a mlx_linux/libmlx.a $(NAME)
 
 .c.o:
-	$(CC) $(CFLAG) -Ilibft -Imlx_linux -c -I/include/cub3d.h $< -o $@
+	$(CC) $(CFLAGS) -Ilibft -Imlx_linux -c -I/include/cub3d.h $< -o $@
 
 $(NAME): ${OBJS}
 	$(CC) ${OBJS} -Llibft -lft $(LINUX) -lmlx -o $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cardi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:07 by avillar           #+#    #+#             */
-/*   Updated: 2022/09/15 10:02:34 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 09:34:50 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int	parse_no(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cno = add_one_char(cno, 1, buf);
+		cno = add_one_char(cno, buf);
 	while (i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cno = add_one_char(cno, 1, buf);
+		cno = add_one_char(cno, buf);
 	}
 	return (0);
 }
@@ -74,13 +74,13 @@ int	parse_so(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cso = add_one_char(cso, 1, buf);
+		cso = add_one_char(cso, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cso = add_one_char(cso, 1, buf);
+		cso = add_one_char(cso, buf);
 	}
 	return (0);
 }
@@ -100,13 +100,13 @@ int	parse_ea(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cea = add_one_char(cea, 1, buf);
+		cea = add_one_char(cea, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cea = add_one_char(cea, 1, buf);
+		cea = add_one_char(cea, buf);
 	}
 	return (0);
 }
@@ -126,13 +126,13 @@ int	parse_we(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cwe = add_one_char(cwe, 1, buf);
+		cwe = add_one_char(cwe, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cwe = add_one_char(cwe, 1, buf);
+		cwe = add_one_char(cwe, buf);
 	}
 	return (0);
 }
