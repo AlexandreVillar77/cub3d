@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:43:38 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 15:13:40 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 15:25:18 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ t_tdata	*init_tdata(t_cube *cube, char *filename)
 	data->img->mlx_img = mlx_xpm_file_to_image(cube->mlx->mlx_ptr, filename,
 			&data->size_x, &data->size_y);
 	if (!data->img->mlx_img)
+	{
+		free (data->img);
+		free (data);
 		return (NULL);
+	}
 	data->img->addr = mlx_get_data_addr(data->img->mlx_img, &data->img->bpp,
 			&data->img->line_len, &data->img->endian);
 	data->img->pimg = (uint8_t *)data->img->addr;
@@ -58,6 +62,7 @@ void	free_textures(t_cube *cube, t_axpm *texture)
 		free (texture->we->img);
 		free (texture->we);
 	}
+	free (texture);
 }
 
 int	check_textures(t_cube *cube, t_axpm *texture)
