@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:32:31 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:42:58 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 10:45:52 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,30 @@ int	check_around(char **map, int i, int y)
 	}
 	if (map[i + 1][y] != '0' && map[i + 1][y] != '1' && map[i + 1][y] != 'N'
 		&& map[i + 1][y] != 'S' && map[i + 1][y] != 'E' && map[i + 1][y] != 'W')
+	{
+		handle_error(7);
+		return (1);
+	}
+	if (map[i + 1][y + 1] != '0' && map[i + 1][y + 1] != '1' && map[i + 1][y + 1] != 'N'
+		&& map[i + 1][y + 1] != 'S' && map[i + 1][y + 1] != 'E' && map[i + 1][y + 1] != 'W')
+	{
+		handle_error(7);
+		return (1);
+	}
+	if (map[i - 1][y + 1] != '0' && map[i - 1][y + 1] != '1' && map[i - 1][y + 1] != 'N'
+		&& map[i - 1][y + 1] != 'S' && map[i - 1][y + 1] != 'E' && map[i - 1][y + 1] != 'W')
+	{
+		handle_error(7);
+		return (1);
+	}
+	if (map[i - 1][y - 1] != '0' && map[i - 1][y - 1] != '1' && map[i - 1][y - 1] != 'N'
+		&& map[i - 1][y - 1] != 'S' && map[i - 1][y - 1] != 'E' && map[i - 1][y - 1] != 'W')
+	{
+		handle_error(7);
+		return (1);
+	}
+	if (map[i + 1][y - 1] != '0' && map[i + 1][y - 1] != '1' && map[i + 1][y - 1] != 'N'
+		&& map[i + 1][y - 1] != 'S' && map[i + 1][y - 1] != 'E' && map[i + 1][y - 1] != 'W')
 	{
 		handle_error(7);
 		return (1);
@@ -92,7 +116,7 @@ int	check_middle(char **map, int *player)
 	int	i;
 	int	y;
 
-	i = 1;
+	i = 0;
 	y = 0;
 	while (map[i + 1])
 	{

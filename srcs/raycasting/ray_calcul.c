@@ -6,7 +6,7 @@
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:17:09 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/21 10:24:37 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/21 10:33:29 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	check_ray(t_ray *ray, t_cube *cube)
 			b = (x + (ray->pdx * 3)) / squax;
 			c = y / squay;
 			d = (x - (ray->pdx * 3)) / squax;
-			if (cmap && cmap[a][b] == '1' && cmap[c][d] == '1')
+			if (cmap[a][b] && cmap[a][b] == '1' && cmap[c][d] == '1')
 			{
 				if (dist_x == 0)
 					dist_x = (double)squax;
