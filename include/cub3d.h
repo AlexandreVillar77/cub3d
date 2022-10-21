@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/21 11:25:15 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 15:10:47 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct	s_img t_img;
 typedef struct	s_chara t_chara;
 typedef struct	s_ddd t_ddd;
 typedef struct	s_ray t_ray;
+typedef struct	s_axpm t_axpm;
+typedef struct	s_tdata t_tdata;
 
 struct s_ray
 {
@@ -97,7 +99,6 @@ struct s_ddd
     int        winh;
     int        winw;
     int        index;
-//    t_img    *ml_img;
     t_img    *backg;
 };
 
@@ -118,10 +119,6 @@ struct s_map
     char    *EA;
     char    *SO;
     char    *WE;
-	int		var_NO[2];
-	int		var_EA[2];
-	int		var_SO[2];
-	int		var_WE[2];
     char    **Fcolor;
     char    **Cellcolor;
 };
@@ -157,12 +154,28 @@ struct s_mlx
 	int		squaret;	//nombre total de carre de la map
 };
 
+struct s_axpm
+{
+	t_tdata	*no;
+	t_tdata	*so;
+	t_tdata	*we;
+	t_tdata	*ea;
+};
+
+struct s_tdata
+{
+	t_img	*img;
+	int		size_x;
+	int		size_y;
+};
+
 struct s_cube
 {
 	int		largestl;	//taille de la plus longue ligne
 	int		nline;		//nombre de ligne de la map
 	int		*mapls;		//nombre de carre de la map pour chaque ligne
 	int		chara_move;	//0 = le joueur ne bouge pas; 1 = deplacement joueur
+	t_axpm	*texture;
 	t_mlx	*mlx;
 	t_map	*map;
 	t_ddd	*dd;
@@ -235,6 +248,7 @@ t_map	*init_map();
 
 //free_struct.c
 void	free_cube(t_cube *cube);
+void	free_split(char **split);
 
 /* Parsing */
 
@@ -276,7 +290,7 @@ void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col);
 void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col);
 
 
-//test
+//test 3d
 
 char	**malloc_lines(char **dest, int l, int n);
 char **put_space(char **map, int l, int n);
@@ -285,5 +299,8 @@ int	get_largest_l(char **map);
 int	check_if_here(t_cube *cube);
 t_ddd	*init_ddd(t_cube *cube);
 
+//test texture
+void	free_textures(t_cube *cube, t_axpm *texture);
+t_axpm	*init_texture(t_cube *cube);
 
 # endif

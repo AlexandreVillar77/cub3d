@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+         #
+#    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:48:10 by thbierne          #+#    #+#              #
-#    Updated: 2022/10/21 09:36:59 by thbierne         ###   ########.fr        #
+#    Updated: 2022/10/21 14:58:03 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS =	srcs/cub3d.c								\
 		srcs/utils/utils2.c							\
 		srcs/3dtest/ver_linep.c						\
 		srcs/3dtest/draw_wall.c						\
+		srcs/xpm_treatement/xpm_to_img.c			\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -43,6 +44,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 FSAN = -g -fsanitize=address
+
+FAST = -Ofast
 
 LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
