@@ -3,14 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   access_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:27 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/17 10:12:06 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 14:51:53 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+int check_xpm(char *str)
+{
+	int i;
+
+	i = ft_strlen(str);
+	if (--i < 4)
+	{
+		handle_error(11);
+		return (1);
+	}
+	if (str[i] != 'm' || str[i - 1] != 'p' || str[i - 2] != 'x'
+		|| str[i - 3] != '.')
+	{
+		handle_error(11);
+		return (1);
+	}
+	if (str[i - 4] == '.')
+	{
+		handle_error(11);
+		return (1);
+	}
+	return (0);
+}
+
+int	set_xpm(t_map *map)
+{
+	if (check_xpm(map->NO) == 1)
+		return (1);
+	if (check_xpm(map->EA) == 1)
+		return (1);
+	if (check_xpm(map->SO) == 1)
+		return (1);
+	if (check_xpm(map->WE) == 1)
+		return (1);
+	return (0);
+}
 
 void	free_split(char **split)
 {
@@ -86,7 +123,8 @@ int	access_texture(t_map *map)
 			handle_error(5);
 			return (1);
 		}
-		free_split(split);
 	}
+	if (set_xpm(map) == 1)
+		return (1);
 	return (0);
 }

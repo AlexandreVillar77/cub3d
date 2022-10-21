@@ -6,7 +6,7 @@
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:57:36 by thbierne          #+#    #+#             */
-/*   Updated: 2022/09/15 09:45:51 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:53:52 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	handle_error_parsing_map(int i)
 	else if (i == 9)
 		printf("Too many player\n");
 	else if (i == 10)
-		printf("Strange symbol found in the map");
+		printf("Strange symbol found in the map\n");
+	else if (i == 11)
+		printf("wrong name for texture\n");
 }
 
 void	handle_error(int i)
@@ -38,7 +40,7 @@ void	handle_error(int i)
 	else if (i == 4)
 		printf("Cannot access texture, check permission or texture existing\n");
 	else if (i == 5)
-		printf("Wrong number use for Floor or Celling in the map\n");
+		printf("Wrong number use for Floor or Ceiling in the map\n");
 	else
 		handle_error_parsing_map(i);
 }
