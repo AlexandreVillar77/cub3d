@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_square.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 09:56:43 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:42:13 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/21 14:04:08 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ void	img_rotate_character(t_cube *cube, int keysim)
 	}
 	else if (keysim == A)
     {
-	    cpixely -= (int)(cube->mlx->chara->pdx * 3);
+	    cpixely += (int)(cube->mlx->chara->pdx * 3);
         cpixelx -= (int)(cube->mlx->chara->pdy * 3);
     }
     else if (keysim == D)
     {
-        cpixely += (int)(cube->mlx->chara->pdx * 3);
+        cpixely -= (int)(cube->mlx->chara->pdx * 3);
         cpixelx += (int)(cube->mlx->chara->pdy * 3);
     }
 	else
