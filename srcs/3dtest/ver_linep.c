@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:59:19 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 14:42:57 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/25 10:10:06 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ void	print_ver_line(t_cube *cube)
 	goal = cube->mlx->chara->pa + (step * (ddwin_s / 2));
 	cube->dd->backg = dra_b(cube);
 	calcul_plan_chara(cube);
+	reset_index(cube);
 	while (pa < goal - step)
 	{
 		ray = ray_casting(cube, pa);

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:43:38 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 15:25:18 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/25 10:07:08 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_tdata	*init_tdata(t_cube *cube, char *filename)
 		free (data);
 		return (NULL);
 	}
+	data->index_t = -1;
+	data->index_b = -1;
 	data->img->addr = mlx_get_data_addr(data->img->mlx_img, &data->img->bpp,
 			&data->img->line_len, &data->img->endian);
 	data->img->pimg = (uint8_t *)data->img->addr;

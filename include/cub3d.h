@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/24 11:07:26 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/25 10:09:33 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@
 # define step (60 * rad_conv) / 1200
 # define n_line get_n_line(cmap)
 # define max_p 4 * winW * winH
-# define g_color (int)((y + (4 * ((data->size_y * (int)(x * y_ratio))))) + (4 * (int)(cube->dd->index * x_ratio)))
+# define g_colorb (int)((y + (4 * ((data->size_y * (int)(x * y_ratio))))) + (4 * (int)(data->index_b * x_ratio)))
+# define g_colort (int)((y - (4 * ((data->size_y * (int)(x * y_ratio))))) + (4 * (int)(data->index_t * x_ratio)))
 
 typedef struct	s_cube t_cube;
 typedef struct	s_map t_map;
@@ -168,6 +169,8 @@ struct s_tdata
 	t_img	*img;
 	int		size_x;
 	int		size_y;
+	int		index_b;
+	int		index_t;
 };
 
 struct s_cube
@@ -304,5 +307,8 @@ t_ddd	*init_ddd(t_cube *cube);
 void	free_textures(t_cube *cube, t_axpm *texture);
 t_axpm	*init_texture(t_cube *cube);
 uint8_t	*get_tex_color_bot(t_cube *cube, t_tdata *data, float h, int x);
+uint8_t	*get_tex_color_top(t_cube *cube, t_tdata *data, float h, int x);
+void	reset_index(t_cube *cube);
+
 
 # endif
