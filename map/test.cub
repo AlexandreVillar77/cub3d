@@ -1,11 +1,11 @@
 NO ./texture/wood_test.xpm
-SO ./texture/path_to_the_south_texture.xpm
-WE ./texture/path_to_the_west_texture.xpm
-EA ./texture/test_texture.xpm
+SO ./texture/wall_south.xpm
+WE ./texture/wall_west.xpm
+EA ./texture/wall_ea.xpm
 
 
-F 220,100,0
-C 255,30,0
+F 120,120,120
+C 20,0,139
 
 11111111
 10000001

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:04:56 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/25 09:28:35 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/25 13:05:46 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	draw_north(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 	i = 4 * ddwin_s;
 	x = 0;
 	h = ddwin_s * Max_at / ray->perpwdist / 2;
+	cube->texture->no->index_b = ray->pos_rayy[0] % (int)squax;
 	while (x < h / 2 && x < ddwin_s / 2)
 	{
 		color_pixel((*dd)->backg->pimg + (y + (4 * (*dd)->index)), get_tex_color_bot(cube, cube->texture->no, h, x));
@@ -63,6 +64,7 @@ void	draw_east(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 	i = 4 * ddwin_s;
 	x = 0;
 	h = ddwin_s * Max_at / ray->perpwdist / 2;
+	cube->texture->ea->index_b = ray->pos_rayx[1] % (int)squax;
 	while (x < h / 2 && x < ddwin_s / 2)
 	{
 		color_pixel((*dd)->backg->pimg + (y + (4 * (*dd)->index)), get_tex_color_bot(cube, cube->texture->ea, h, x ));
@@ -87,6 +89,7 @@ void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 	i = 4 * ddwin_s;
 	x = 0;
 	h = ddwin_s * Max_at / ray->perpwdist / 2;
+	cube->texture->we->index_b = ray->pos_rayx[1] % (int)squax;
 	while (x < h / 2 && x < ddwin_s / 2)
 	{
 		color_pixel((*dd)->backg->pimg + (y + (4 * (*dd)->index)), get_tex_color_bot(cube, cube->texture->we, h, x));
@@ -111,6 +114,9 @@ void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 	i = 4 * ddwin_s;
 	x = 0;
 	h = ddwin_s * Max_at / ray->perpwdist / 2;
+	cube->texture->so->index_b = ray->pos_rayy[0] % (int)squax;
+	//printf("x = %d, y = %d\n", ray->pos_rayy[0], ray->pos_rayy[1]);
+	//printf("squares = %d", ray->pos_rayy[0] %(int)squax);
 	while (x < h / 2 && x < ddwin_s / 2)
 	{
 		color_pixel((*dd)->backg->pimg + (y + (4 * (*dd)->index)), get_tex_color_bot(cube, cube->texture->so, h, x));

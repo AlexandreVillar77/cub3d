@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/25 10:09:33 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/25 13:01:01 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@
 # define step (60 * rad_conv) / 1200
 # define n_line get_n_line(cmap)
 # define max_p 4 * winW * winH
-# define g_colorb (int)((y + (4 * ((data->size_y * (int)(x * y_ratio))))) + (4 * (int)(data->index_b * x_ratio)))
-# define g_colort (int)((y - (4 * ((data->size_y * (int)(x * y_ratio))))) + (4 * (int)(data->index_t * x_ratio)))
+# define g_colorb (int)((y + (4 * ((data->size_y * (int)(x * y_ratio))))) + (4 * (int)(x_ratio)))
+# define g_colort (int)((y - (4 * ((data->size_y * (int)(x * y_ratio))))) + (4 * (int)(data->index_b * x_ratio)))
 
 typedef struct	s_cube t_cube;
 typedef struct	s_map t_map;
