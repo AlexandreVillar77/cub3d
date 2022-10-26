@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:51:41 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 15:18:40 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/26 11:08:45 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	dest_mlx(t_cube *cube)
 	if (!cube->mlx)
 		return ;
 	if (cube->mlx->mlx_ptr)
+	{
 		mlx_destroy_display(cube->mlx->mlx_ptr);
-	free (cube->mlx->mlx_ptr);
+		free (cube->mlx->mlx_ptr);
+	}
 	free (cube->mlx);
 }
 
@@ -66,8 +68,9 @@ void	free_map(t_cube *cube)
 		free (cea);
 	if (cwe)
 		free (cwe);
-	if (cube->map->map)
-		free_map_map(cube->map->map);
+	if (cube->map)
+		if (cube->map->map)
+			free_map_map(cube->map->map);
 	if (cube->mapls)
 		free (cube->mapls);
 }
@@ -81,17 +84,21 @@ void	free_ddd(t_cube *cube)
 			mlx_destroy_image(cube->mlx->mlx_ptr, cube->dd->backg->mlx_img);
 	if (cube->dd->backg)
 		free (cube->dd->backg);
-	free (cube->dd);
+	if (cube->dd)
+		free (cube->dd);
 }
 
 void	free_cube(t_cube *cube)
 {
+	if (!cube)
+		return ;
 	if (cube->texture)
 		free_textures(cube, cube->texture);
 	if (cube->map)
 		free_map(cube);
-	if (cube->mlx && cube->mlx->chara)
-		free (cube->mlx->chara);
+	if (cube->mlx)
+		if (cube->mlx->chara)
+			free (cube->mlx->chara);
 	free_ddd(cube);
 	dest_mlx(cube);
 	if (cube->map)

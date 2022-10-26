@@ -6,13 +6,11 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 15:27:23 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/25 13:07:34 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/25 14:44:02 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-// h = hauteur du mur
 
 void	reset_index(t_cube *cube)
 {
@@ -35,12 +33,11 @@ uint8_t	*get_tex_color_bot(t_cube *cube, t_tdata *data, float h, int x)
 
 	max = 4 * data->size_x * data->size_y;
 	y = max / 2;
-	x_ratio = data->size_x * data->index_b / squax;//data->size_x / h;
+	x_ratio = data->size_x * data->index_b / squax;
 	y_ratio = data->size_y / h;
 	(void)cube;
 	if (g_colorb > max)
 		data->index_b = -1;
-	//data->index_b++;
 	return (data->img->pimg + g_colorb);
 }
 
@@ -53,12 +50,11 @@ uint8_t	*get_tex_color_top(t_cube *cube, t_tdata *data, float h, int x)
 
 	max = 4 * data->size_x * data->size_y;
 	y = max / 2;
-	x_ratio = data->size_x * data->index_b / squax;//data->size_x / h;
+	x_ratio = data->size_x * data->index_b / squax;
 	y_ratio = data->size_y / h;
 	(void)cube;
 	if (g_colort < 0)
 		data->index_t = -1;
-	//data->index_t++;
 	return (data->img->pimg + (int)((y - (4 * ((data->size_y * (int)(x * y_ratio)))))
 		+ (4 * (int)(x_ratio))));
 }

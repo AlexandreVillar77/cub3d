@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:59:19 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/25 11:08:08 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/26 10:50:11 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	draw_back(t_img **backg, uint8_t *ceil, uint8_t *floor)
 
 	i = 0;
 	a = max_p;
-	//printf("a = %d\n", a);
 	while (i < a)
 	{
 		if (i < (a / 2))
@@ -129,13 +128,13 @@ void	draw_back(t_img **backg, uint8_t *ceil, uint8_t *floor)
 void	draw_ddd(t_ddd *dd, t_cube *cube, t_ray *ray)
 {
 	if (ray->side == 1)
-		(draw_south(&dd, cube, ray, get_colors("0", "0", "0")));
+		(draw_south(&dd, cube, ray));
 	else if (ray->side == 2)
-		(draw_east(&dd, cube, ray, get_colors("176", "0", "252")));
+		(draw_east(&dd, cube, ray));
 	else if (ray->side == 3)
-		draw_north(&dd, cube, ray, get_colors("255", "255", "255"));	
+		draw_north(&dd, cube, ray);	
 	else if (ray->side == 4)
-		(draw_west(&dd, cube, ray, get_colors("255", "87", "177")));
+		(draw_west(&dd, cube, ray));
 }
 
 int		rcint(char **s, int i)

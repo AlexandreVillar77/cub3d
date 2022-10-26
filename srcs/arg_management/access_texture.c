@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:27 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/21 14:51:53 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:36:23 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int	access_texture(t_map *map)
 			split = map->Fcolor;
 		if (check_floor_cell(split) == 1)
 		{
-			free_split(split);
 			handle_error(5);
 			return (1);
 		}

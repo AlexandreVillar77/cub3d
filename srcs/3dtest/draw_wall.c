@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:04:56 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/25 13:05:46 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/26 10:48:25 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ uint8_t	*get_colors(char *s1, char *s2, char *s3)
 	return (col);
 }
 
-// y descend et x monte
 
-void	draw_north(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
+void	draw_north(t_ddd **dd, t_cube *cube, t_ray *ray)
 {
 	float		h;
 	int			y;
@@ -48,10 +47,9 @@ void	draw_north(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 		i += 4 * ddwin_s;
 		x++;
 	}
-	free (col);
 }
 
-void	draw_east(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
+void	draw_east(t_ddd **dd, t_cube *cube, t_ray *ray)
 {
 	float		h;
 	int			y;
@@ -73,10 +71,9 @@ void	draw_east(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 		i += 4 * ddwin_s;
 		x++;
 	}
-	free (col);
 }
 
-void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
+void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray)
 {
 	float		h;
 	int			y;
@@ -98,10 +95,9 @@ void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 		i += 4 * ddwin_s;
 		x++;
 	}
-	free (col);
 }
 
-void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
+void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray)
 {
 	float		h;
 	int			y;
@@ -115,8 +111,6 @@ void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 	x = 0;
 	h = ddwin_s * Max_at / ray->perpwdist / 2;
 	cube->texture->so->index_b = ray->pos_rayy[0] % (int)squax;
-	//printf("x = %d, y = %d\n", ray->pos_rayy[0], ray->pos_rayy[1]);
-	//printf("squares = %d", ray->pos_rayy[0] %(int)squax);
 	while (x < h / 2 && x < ddwin_s / 2)
 	{
 		color_pixel((*dd)->backg->pimg + (y + (4 * (*dd)->index)), get_tex_color_bot(cube, cube->texture->so, h, x));
@@ -125,5 +119,4 @@ void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col)
 		i += 4 * ddwin_s;
 		x++;
 	}
-	free (col);
 }

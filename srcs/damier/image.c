@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:24:23 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/21 15:09:33 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/26 11:15:22 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	handle_keypress(int keysym, t_cube *cube)
 	{
 		mlx_destroy_window(cube->mlx->mlx_ptr, cube->dd->win_ptr);
 		cube->dd->win_ptr = NULL;
+		mlx_loop_end(cube->mlx->mlx_ptr);
 	}
 	else
 	{
@@ -58,13 +59,30 @@ int	render(t_cube *cube)
 
 //mlx_hook(cube->mlx->win_ptr, 17, 0, &handle_keypress, cube); pour fermer sur la croix rouge
 
+int	prog_leaver(t_cube *cube)
+{
+	/*if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
+	{
+		mlx_destroy_display(cube->mlx->mlx_ptr);
+		cube->dd->win_ptr = NULL;
+	}*/
+	mlx_destroy_window(cube->mlx->mlx_ptr, cube->dd->win_ptr);
+	//mlx_destroy_display(cube->mlx->mlx_ptr);
+//	cube->dd->win_ptr = NULL;
+	mlx_loop_end(cube->mlx->mlx_ptr);
+	free_cube(cube);
+	exit (0);
+	return (0);
+}
+
 void	ml_loop(t_cube *cube)
 {
-	//printf("test");
-	mlx_loop_hook(cube->mlx->mlx_ptr, &render, cube);
-	mlx_hook(cube->dd->win_ptr, 02, 1L<<0, &handle_keypress, cube);
-//mlx_hook(cube->mlx->win_ptr, 03, 0, &handle_stoppress, cube);
-	//mlx_key_hook(cube->mlx->win_ptr, &handle_keypress, cube);
+	if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
+		mlx_loop_hook(cube->mlx->mlx_ptr, &render, cube);
+	if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
+		mlx_hook(cube->dd->win_ptr, 17, 0, &prog_leaver, cube);
+	if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
+		mlx_hook(cube->dd->win_ptr, 02, 1L<<0, &handle_keypress, cube);
 	if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
 		mlx_loop(cube->mlx->mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/25 13:01:01 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/26 11:14:02 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 # define winW 1200
 # define winH 1200
 # define Ppov 60
-# define Csx 600
+# define Csx 400
 # define DF 65363
 # define GF 65361
 # define ddwin_s 1200
@@ -287,11 +287,11 @@ void    print_ver_line(t_cube *cube);
 //test 3d
 
 void	color_pixel(uint8_t *pixel, uint8_t *color);
-void	draw_north(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col);
+void	draw_north(t_ddd **dd, t_cube *cube, t_ray *ray);
 uint8_t	*get_colors(char *s1, char *s2, char *s3);
-void	draw_east(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col);
-void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col);
-void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray, uint8_t *col);
+void	draw_east(t_ddd **dd, t_cube *cube, t_ray *ray);
+void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray);
+void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray);
 
 
 //test 3d
