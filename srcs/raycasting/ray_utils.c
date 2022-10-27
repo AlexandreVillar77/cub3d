@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:03:31 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:49:37 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/24 11:07:22 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,34 @@ void	calcul_plan_chara(t_cube *cube)
 	cube->mlx->chara->p_per[0] = cube->mlx->chara->pa * 180 / pi;
 	cube->mlx->chara->p_per[1] = cube->mlx->chara->p_per[0] + 90;
 	cube->mlx->chara->p_per[0] -= 90;
+}
+
+void	change_ray_y(t_cube *cube, t_ray *ray, double *dist_y)
+{
+	if (*dist_y == 0)
+		*dist_y = (double)squay;
+	else if (*dist_y == squay)
+		*dist_y = 0;
+	else if (ray->pdy < 0)
+	{
+		*dist_y = (double)(*dist_y * -1);
+		*dist_y = (double)(squay - *dist_y);
+	}
+	else
+		*dist_y = (double)(*dist_y - squay);
+}
+
+void	change_ray_x(t_cube *cube, t_ray *ray, double *dist_x)
+{
+	if (*dist_x == 0)
+		*dist_x = (double)squax;
+	else if (*dist_x == squax)
+		*dist_x = 0;
+	else if (ray->pdx < 0)
+	{
+		*dist_x = (double)(*dist_x * -1);
+		*dist_x = (double)(squax - *dist_x);
+	}
+	else
+		*dist_x = (double)(*dist_x - squax);
 }

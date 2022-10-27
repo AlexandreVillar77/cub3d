@@ -6,7 +6,7 @@
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:17:09 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/21 10:33:29 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/24 13:15:05 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,18 @@ t_ray	*ray_casting(t_cube *cube, float pa)
 	if (degree1 == 90)
 	{
 		ray->perpwdist = ray->eucli;
-		//printf("\nside:%d\n", ray->side);
-		//printf("eucli:%f\n", ray->eucli);
-		//printf("perpwdist:%f  ", ray->perpwdist);
 		return (ray);
 	}
 	degree1 = (float)((degree1 * (float)pi) / 180);
 	ray->perpwdist = ray->eucli * sin(degree1);
-	//ray->perpwdist *= 5;
 	ray->perpwdist = (int)(floor(ray->perpwdist + 0.5));
-	//printf("\nside:%d\n", ray->side);
-	//printf("eucli:%f\n", ray->eucli);
-	//printf("perpwdist:%f  ", ray->perpwdist);
 	return (ray);
 }
 
 void	detect_wall(t_ray *ray, t_cube *cube)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = cpixelx / (int)squax;
 	y = cpixely / (int)squay;
@@ -59,9 +52,10 @@ void	detect_wall(t_ray *ray, t_cube *cube)
 		return ;
 	if (y < cube->nline && x < cube->largestl)
 		if (x < ft_strlen(cmap[y]))
-			if (cmap[y][x] == '0' || cmap[y][x] == 'N' || cmap[y][x] == 'W' || cmap[y][x] == 'S' || cmap[y][x] == 'E')
+			if (cmap[y][x] == '0' || cmap[y][x] == 'N' || cmap[y][x] == 'W'
+				|| cmap[y][x] == 'S' || cmap[y][x] == 'E')
 				check_ray(ray, cube);
-	return;
+	return ;
 }
 
 void	check_ray(t_ray *ray, t_cube *cube)
@@ -88,63 +82,19 @@ void	check_ray(t_ray *ray, t_cube *cube)
 			c = y / squay;
 			d = (x - (ray->pdx * 3)) / squax;
 			if (cmap[a][b] && cmap[a][b] == '1' && cmap[c][d] == '1')
-			{
-				if (dist_x == 0)
-					dist_x = (double)squax;
-				else if (dist_x == squax)
-					dist_x = 0;
-				else if (ray->pdx < 0)
-				{
-					dist_x = (double)(dist_x * -1);
-					dist_x = (double)(squax - dist_x);
-				}
-				else
-					dist_x = (double)(dist_x - squax);
-			}
+				change_ray_x(cube, ray, &dist_x);
 			else
-			{
-				if (dist_y == 0)
-					dist_y = (double)squay;
-				else if (dist_y == squay)
-					dist_y = 0;
-				else if (ray->pdy < 0)
-				{
-					dist_y = (double)(dist_y * -1);
-					dist_y = (double)(squay - dist_y);
-				}
-				else
-					dist_y = (double)(dist_y - squay);
-			}
+				change_ray_y(cube, ray, &dist_y);
 		}
 		if (dist_y >= squay || dist_y <= 0)
 		{
 			check_wall_y(ray, cube, x, y);
-			if (dist_y == 0)
-				dist_y = (double)squay;
-			else if (dist_y == squay)
-				dist_y = 0;
-			else if (ray->pdy < 0)
-			{
-				dist_y = (double)(dist_y * -1);
-				dist_y = (double)(squay - dist_y);
-			}
-			else
-				dist_y = (double)(dist_y - squay);
+			change_ray_y(cube, ray, &dist_y);
 		}
 		else if (dist_x >= squax || dist_x <= 0)
 		{
 			check_wall_x(ray, cube, x, y);
-			if (dist_x == 0)
-				dist_x = (double)squax;
-			else if (dist_x == squax)
-				dist_x = 0;
-			else if (ray->pdx < 0)
-			{
-				dist_x = (double)(dist_x * -1);
-				dist_x = (double)(squax - dist_x);
-			}
-			else
-				dist_x = (double)(dist_x - squax);
+			change_ray_x(cube, ray, &dist_x);
 		}
 		if (ray->eucli != -1)
 		{
@@ -200,10 +150,6 @@ void	check_wall_x(t_ray *ray, t_cube *cube, int x, int y)
 	if (cmap[y][x] && cmap[y][x] == '1')
 	{
 		ray->side = 0;
-		/*if (ray->pdx < 0)
-			ray->pos_rayx[1] += 1;
-		else
-			ray->pos_rayx[1] -= 1;*/
 		calcul_eucli(ray, cube, 0);
 	}
 }

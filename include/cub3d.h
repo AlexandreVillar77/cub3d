@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/26 11:14:02 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:26:30 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ void	handle_error(int i);
 //check map
 int		check_map(t_map *map);
 int		print_error_player(int player);
+int		look_around(char **map, int i, int y);
 
 /*	calcul et affichage map	*/
 
@@ -204,6 +205,11 @@ void	print_chara(t_cube *cube);
 t_chara	*init_char(t_cube *cube);
 void	img_rotate_character(t_cube *cube, int keysim);
 void	print_o_line(t_cube *cube, t_img **line);
+
+void	player_up(t_cube *cube);
+void	player_down(t_cube *cube);
+void	player_rotate_left(t_cube *cube);
+void	player_rotate_right(t_cube *cube);
 
 // affichage carre
 void	get_size_square(t_cube *cube);
@@ -214,6 +220,8 @@ void	img_pix_put(t_img **img, int x, int y, int color, t_cube *cube);
 // ray casting
 t_ray	*ray_casting(t_cube *cube, float pa);
 void	detect_wall(t_ray *ray, t_cube *cube);
+void	change_ray_y(t_cube *cube, t_ray *ray, double *dist_y);
+void	change_ray_x(t_cube *cube, t_ray *ray, double *dist_x);
 
 void	init_t_ray(t_ray *ray, float pa, t_cube *cube);
 void	return_side(t_ray *ray);
@@ -236,6 +244,7 @@ void	tab_xy(t_cube *cube);
 //utils2.c
 void	print_map(t_cube *cube);
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
+void	free_split(char **split);
 
 /*	image.c	*/
 

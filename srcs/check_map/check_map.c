@@ -6,7 +6,7 @@
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:32:31 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/21 14:19:48 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:47:24 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,55 +14,31 @@
 
 int	check_around(char **map, int i, int y)
 {
-	if (map[i][y + 1] != '0' && map[i][y + 1] != '1' && map[i][y + 1] != 'N'
-		&& map[i][y + 1] != 'S' && map[i][y + 1] != 'E' && map[i][y + 1] != 'W')
+	if (map[i][y + 1] != '0' && map[i][y + 1] != '1'
+		&& map[i][y + 1] != 'N'
+		&& map[i][y + 1] != 'S' && map[i][y + 1] != 'E'
+		&& map[i][y + 1] != 'W')
 	{
 		handle_error(7);
 		return (1);
 	}
-	if (map[i][y - 1] != '0' && map[i][y - 1] != '1' && map[i][y - 1] != 'N'
-		&& map[i][y - 1] != 'S' && map[i][y - 1] != 'E' && map[i][y - 1] != 'W')
+	if (map[i][y - 1] != '0' && map[i][y - 1] != '1'
+		&& map[i][y - 1] != 'N'
+		&& map[i][y - 1] != 'S' && map[i][y - 1] != 'E'
+		&& map[i][y - 1] != 'W')
 	{
 		handle_error(7);
 		return (1);
 	}
-	if (map[i - 1][y] != '0' && map[i - 1][y] != '1' && map[i - 1][y] != 'N'
-		&& map[i - 1][y] != 'S' && map[i - 1][y] != 'E' && map[i - 1][y] != 'W')
+	if (map[i - 1][y] != '0' && map[i - 1][y] != '1'
+		&& map[i - 1][y] != 'N'
+		&& map[i - 1][y] != 'S' && map[i - 1][y] != 'E'
+		&& map[i - 1][y] != 'W')
 	{
 		handle_error(7);
 		return (1);
 	}
-	if (map[i + 1][y] != '0' && map[i + 1][y] != '1' && map[i + 1][y] != 'N'
-		&& map[i + 1][y] != 'S' && map[i + 1][y] != 'E' && map[i + 1][y] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
-	if (map[i + 1][y + 1] != '0' && map[i + 1][y + 1] != '1' && map[i + 1][y + 1] != 'N'
-		&& map[i + 1][y + 1] != 'S' && map[i + 1][y + 1] != 'E' && map[i + 1][y + 1] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
-	if (map[i - 1][y + 1] != '0' && map[i - 1][y + 1] != '1' && map[i - 1][y + 1] != 'N'
-		&& map[i - 1][y + 1] != 'S' && map[i - 1][y + 1] != 'E' && map[i - 1][y + 1] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
-	if (map[i - 1][y - 1] != '0' && map[i - 1][y - 1] != '1' && map[i - 1][y - 1] != 'N'
-		&& map[i - 1][y - 1] != 'S' && map[i - 1][y - 1] != 'E' && map[i - 1][y - 1] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
-	if (map[i + 1][y - 1] != '0' && map[i + 1][y - 1] != '1' && map[i + 1][y - 1] != 'N'
-		&& map[i + 1][y - 1] != 'S' && map[i + 1][y - 1] != 'E' && map[i + 1][y - 1] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
-	return (0);
+	return (look_around(map, i, y));
 }
 
 int	check_top_bot(char **map, int y)

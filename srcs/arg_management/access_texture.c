@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:27 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/26 10:36:23 by avillar          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:26:19 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ int	set_xpm(t_map *map)
 	if (check_xpm(map->WE) == 1)
 		return (1);
 	return (0);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free (split);
 }
 
 int	check_floor_cell_var(char **split)
