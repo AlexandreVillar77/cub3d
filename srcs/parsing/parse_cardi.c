@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:07 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/02 11:39:23 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:09:46 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	parse_no(int fd, t_cube *cube)
 	char	buf;
 	int		i;
 
-	if (check_if_right(fd, "O ") == 1)
-		return (manage_error('N', 1));
+	if (check_if_right(fd, "O ") == 1 || check_double(cube, 0) == 1)
+		return (manage_error('N', 1, cube));
 	i = 1;
 	while (i > 0)
 	{
@@ -64,8 +64,8 @@ int	parse_so(int fd, t_cube *cube)
 	char	buf;
 	int		i;
 
-	if (check_if_right(fd, "O ") == 1)
-		return (manage_error('S', 1));
+	if (check_if_right(fd, "O ") == 1 || check_double(cube, 1) == 1)
+		return (manage_error('S', 1, cube));
 	i = 1;
 	while (i > 0)
 	{
@@ -90,8 +90,8 @@ int	parse_ea(int fd, t_cube *cube)
 	char	buf;
 	int		i;
 
-	if (check_if_right(fd, "A ") == 1)
-		return (manage_error('E', 1));
+	if (check_if_right(fd, "A ") == 1 || check_double(cube, 2) == 1)
+		return (manage_error('E', 1, cube));
 	i = 1;
 	while (i > 0)
 	{
@@ -116,8 +116,8 @@ int	parse_we(int fd, t_cube *cube)
 	char	buf;
 	int		i;
 
-	if (check_if_right(fd, "E ") == 1)
-		return (manage_error('W', 1));
+	if (check_if_right(fd, "E ") == 1 || check_double(cube, 3) == 1)
+		return (manage_error('W', 1, cube));
 	i = 1;
 	while (i > 0)
 	{

@@ -6,11 +6,34 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 10:12:30 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/02 11:35:41 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:08:57 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+int	check_double(t_cube *cube, int n)
+{
+	if (n == 0)
+		if (cube->map->no)
+			return (1);
+	if (n == 1)
+		if (cube->map->so)
+			return (1);
+	if (n == 2)
+		if (cube->map->ea)
+			return (1);
+	if (n == 3)
+		if (cube->map->we)
+			return (1);
+	if (n == 4)
+		if (cube->map->fcolor)
+			return (1);
+	if (n == 5)
+		if (cube->map->cellcolor)
+			return (1);
+	return (0);
+}
 
 char	s_wp(int fd)
 {
@@ -48,8 +71,8 @@ int	parse_fc(int fd, t_cube *cube)
 	int		i;
 	char	*cfc;
 
-	if (check_if_right(fd, " ") == 1)
-		return (manage_error('F', 1));
+	if (check_if_right(fd, " ") == 1 || check_double(cube, 4) == 1)
+		return (manage_error('F', 2, cube));
 	i = 1;
 	while (i > 0)
 	{
@@ -76,8 +99,8 @@ int	parse_cellcolor(int fd, t_cube *cube)
 	int		i;
 	char	*ccc;
 
-	if (check_if_right(fd, " ") == 1)
-		return (manage_error('C', 1));
+	if (check_if_right(fd, " ") == 1 || check_double(cube, 5) == 1)
+		return (manage_error('C', 2, cube));
 	i = 1;
 	while (i > 0)
 	{

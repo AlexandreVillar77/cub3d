@@ -6,23 +6,28 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:24:23 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 10:58:20 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:18:43 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+int	handle_keyup(int keysym, t_cube *cube)
+{
+	cube->keyp = 0;
+	cube->keysym = keysym;
+	return (0);
+}
+
 int	handle_keypress(int keysym, t_cube *cube)
 {
+	cube->keyp = 1;
+	cube->keysym = keysym;
 	if (keysym == ECHAP)
 	{
 		mlx_destroy_window(cube->mlx->mlx_ptr, cube->dd->win_ptr);
 		cube->dd->win_ptr = NULL;
 		mlx_loop_end(cube->mlx->mlx_ptr);
-	}
-	else
-	{
-		img_rotate_character(cube, keysym);
 	}
 	return (0);
 }
@@ -55,6 +60,8 @@ int	render(t_cube *cube)
 		mlx_put_image_to_window(cube->mlx->mlx_ptr, cube->dd->win_ptr,
 			cube->dd->backg->mlx_img, 0, 0);
 	}
+	if (cube->keyp == 1)
+		img_rotate_character(cube, cube->keysym);
 	return (0);
 }
 
@@ -75,6 +82,8 @@ void	ml_loop(t_cube *cube)
 		mlx_hook(cube->dd->win_ptr, 17, 0, &prog_leaver, cube);
 	if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
 		mlx_hook(cube->dd->win_ptr, 02, 1L << 0, &handle_keypress, cube);
+	if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
+		mlx_hook(cube->dd->win_ptr, 03, 1L << 1, &handle_keyup, cube);
 	if (cube->dd->win_ptr && cube->mlx->mlx_ptr)
 		mlx_loop(cube->mlx->mlx_ptr);
 }

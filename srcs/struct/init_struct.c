@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:47 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/02 11:38:16 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:16:14 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_map	*init_map(void)
 	map = malloc(sizeof(t_map));
 	if (!map)
 		exit(EXIT_FAILURE);
+	map->error = 0;
 	map->cellcolor = NULL;
 	map->fcolor = NULL;
 	map->map = NULL;
@@ -65,5 +66,7 @@ t_cube	*init_cube(void)
 	cube->mapls = NULL;
 	cube->dd = NULL;
 	cube->texture = NULL;
+	cube->keyp = 0;
+	cube->keysym = 0;
 	return (cube);
 }

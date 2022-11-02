@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 11:30:49 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:16:11 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ struct	s_img
 
 struct	s_map
 {
+	int			error;
 	char		**map;
 	char		*no;
 	char		*ea;
@@ -192,6 +193,8 @@ struct s_cube
 	t_mlx		*mlx;
 	t_map		*map;
 	t_ddd		*dd;
+	int			keyp;
+	int			keysym;
 };
 
 /*	check debut de programme	*/
@@ -282,6 +285,7 @@ int		check_cub(char *argv);
 int		check_arg(int argc, char **argv);
 
 //parse_cardi.c
+int		check_double(t_cube *cube, int n);
 int		check_if_right(int fd, char *expected);
 int		parse_no(int fd, t_cube *cube);
 int		parse_so(int fd, t_cube *cube);
@@ -294,7 +298,7 @@ int		parse_fc(int fd, t_cube *cube);
 int		parse_cellcolor(int fd, t_cube *cube);
 
 //skip_error.c
-int		manage_error(char c, int mode);
+int		manage_error(char c, int mode, t_cube *cube);
 int		manager(int fd, char c, t_cube *cube);
 int		check_if_set(t_cube *cube);
 

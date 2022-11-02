@@ -6,16 +6,19 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 09:52:10 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/02 11:36:27 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:11:07 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	manage_error(char c, int mode)
+int	manage_error(char c, int mode, t_cube *cube)
 {
 	(void)c;
-	(void)mode;
+	if (mode == 1)
+		cube->map->error = 1;
+	else if (mode == 2)
+		cube->map->error = 2;
 	return (1);
 }
 
@@ -34,7 +37,7 @@ int	manager(int fd, char c, t_cube *cube)
 	else if (c == 'C')
 		return (parse_cellcolor(fd, cube));
 	else
-		return (manage_error(c, 0));
+		return (manage_error(c, 0, cube));
 }
 
 int	check_if_set(t_cube *cube)
