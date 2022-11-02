@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 15:27:23 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/25 14:44:02 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:45:53 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ uint8_t	*get_tex_color_bot(t_cube *cube, t_tdata *data, float h, int x)
 {
 	float	x_ratio;
 	float	y_ratio;
-	int	y;
+	int		y;
 	int		max;
+	int		calc;
 
 	max = 4 * data->size_x * data->size_y;
 	y = max / 2;
-	x_ratio = data->size_x * data->index_b / squax;
+	x_ratio = data->size_x * data->index_b / cube->mlx->squarex;
 	y_ratio = data->size_y / h;
-	(void)cube;
-	if (g_colorb > max)
+	calc = (int)((y + (4 * ((data->size_y
+							* (int)(x * y_ratio))))) + (4 * (int)(x_ratio)));
+	if (calc > max)
 		data->index_b = -1;
-	return (data->img->pimg + g_colorb);
+	return (data->img->pimg + calc);
 }
 
 uint8_t	*get_tex_color_top(t_cube *cube, t_tdata *data, float h, int x)
@@ -47,14 +49,15 @@ uint8_t	*get_tex_color_top(t_cube *cube, t_tdata *data, float h, int x)
 	float	y_ratio;
 	int		y;
 	int		max;
+	int		calc;
 
 	max = 4 * data->size_x * data->size_y;
 	y = max / 2;
-	x_ratio = data->size_x * data->index_b / squax;
+	x_ratio = data->size_x * data->index_b / cube->mlx->squarex;
 	y_ratio = data->size_y / h;
-	(void)cube;
-	if (g_colort < 0)
+	calc = (int)((y - (4 * ((data->size_y
+							* (int)(x * y_ratio))))) + (4 * (int)(x_ratio)));
+	if (calc < 0)
 		data->index_t = -1;
-	return (data->img->pimg + (int)((y - (4 * ((data->size_y * (int)(x * y_ratio)))))
-		+ (4 * (int)(x_ratio))));
+	return (data->img->pimg + calc);
 }

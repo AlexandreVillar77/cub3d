@@ -6,7 +6,7 @@
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:32:31 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/24 09:47:24 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:44:37 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,17 @@ int	check_around(char **map, int i, int y)
 		&& map[i][y + 1] != 'N'
 		&& map[i][y + 1] != 'S' && map[i][y + 1] != 'E'
 		&& map[i][y + 1] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
+		return (handle_error(7));
 	if (map[i][y - 1] != '0' && map[i][y - 1] != '1'
 		&& map[i][y - 1] != 'N'
 		&& map[i][y - 1] != 'S' && map[i][y - 1] != 'E'
 		&& map[i][y - 1] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
+		return (handle_error(7));
 	if (map[i - 1][y] != '0' && map[i - 1][y] != '1'
 		&& map[i - 1][y] != 'N'
 		&& map[i - 1][y] != 'S' && map[i - 1][y] != 'E'
 		&& map[i - 1][y] != 'W')
-	{
-		handle_error(7);
-		return (1);
-	}
+		return (handle_error(7));
 	return (look_around(map, i, y));
 }
 
@@ -49,10 +40,7 @@ int	check_top_bot(char **map, int y)
 	while (map[y][i])
 	{
 		if (map[y][i] != ' ' && map[y][i] != '1')
-		{
-			handle_error(7);
-			return (1);
-		}
+			return (handle_error(7));
 		i++;
 	}
 	return (0);
@@ -78,10 +66,7 @@ int	check_middle_2(char **map, int *player, int i, int y)
 			*player = *player + 1;
 		}
 		else if (map[i][y] != ' ' && map[i][y] != '1')
-		{
-			handle_error(10);
-			return (1);
-		}
+			return (handle_error(10));
 		y++;
 	}
 	return (0);
@@ -109,15 +94,12 @@ int	check_map(t_map *map)
 	int	i;
 
 	if (!map->map)
-		return (1);
+		return (handle_error(12));
 	player = 0;
 	while (map->map[player])
 		player++;
 	if (player <= 2)
-	{
-		handle_error(6);
-		return (1);
-	}
+		return (handle_error(6));
 	player = 0;
 	if (check_top_bot(map->map, 0) == 1 || check_middle(map->map, &player) == 1)
 		return (1);

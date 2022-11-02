@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:11:44 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 17:50:17 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:46:39 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ char	*add_one_char(char *src, char c)
 	return (dest);
 }
 
-int		get_tab_ylen(char **str, t_cube *cube)
+int	get_tab_ylen(char **str, t_cube *cube)
 {
 	int	i;
 	int	x;
-	
+
 	if (!str)
 		return (0);
 	x = 0;
@@ -82,23 +82,23 @@ int		get_tab_ylen(char **str, t_cube *cube)
 		if (x > cube->largestl)
 			cube->largestl = x;
 		i++;
-	}return (i);
+	}
+	return (i);
 }
 
 void	tab_xy(t_cube *cube)
 {
 	int	i;
 
-	if (!cmap)
+	if (!cube->map->map)
 		return ;
 	cube->mapls = malloc(sizeof(int) * (cube->nline + 1));
 	if (!cube->mapls)
 		return ;
 	i = 0;
-
 	while (i < cube->nline - 1)
 	{
-		cube->mapls[i] = ft_strlen(cmap[i]);
+		cube->mapls[i] = ft_strlen(cube->map->map[i]);
 		i++;
 	}
 	cube->mapls[i] = 0;

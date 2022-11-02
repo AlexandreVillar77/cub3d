@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 09:52:10 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 11:24:47 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:36:27 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 int	manage_error(char c, int mode)
 {
-	if (mode == 0)
-	{
-		printf("Error\n%c is not an authorised identifier\n", c);
-	}
-	else if (mode == 1)
-		printf("Error\nunexpected identifier near %c in file .cub\n", c);
+	(void)c;
+	(void)mode;
 	return (1);
 }
 
@@ -43,7 +39,8 @@ int	manager(int fd, char c, t_cube *cube)
 
 int	check_if_set(t_cube *cube)
 {
-	if (cmcc && cno && cso && cea && cwe && cmfc)
+	if (cube->map->cellcolor && cube->map->no && cube->map->so
+		&& cube->map->ea && cube->map->we && cube->map->fcolor)
 		return (0);
 	else
 		return (1);

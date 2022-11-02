@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 09:54:55 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/14 13:54:23 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:38:30 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ void	print_map(t_cube *cube)
 	int	i;
 
 	i = 0;
-	printf("NO = %s\n", cube->map->NO);
-	printf("WE = %s\n", cube->map->WE);
-	printf("EA = %s\n", cube->map->EA);
-	printf("SO = %s\n", cube->map->SO);
-	//printf("Fc = %s\n", cube->map->Fcolor);
-	//printf("Cellcolor = %s\n", cube->map->Cellcolor);
+	printf("NO = %s\n", cube->map->no);
+	printf("WE = %s\n", cube->map->we);
+	printf("EA = %s\n", cube->map->ea);
+	printf("SO = %s\n", cube->map->so);
 	if (!cube->map->map)
 		return ;
 	while (cube->map->map[i])

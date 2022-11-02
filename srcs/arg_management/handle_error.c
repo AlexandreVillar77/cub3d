@@ -6,18 +6,18 @@
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:57:36 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/21 14:53:52 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:40:27 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	handle_error_parsing_map(int i)
+int	handle_error_parsing_map(int i)
 {
 	if (i == 6)
 		printf("Not enought line for the map\n");
 	else if (i == 7)
-		printf("Map not close\n");
+		printf("Problem in the map\n");
 	else if (i == 8)
 		printf("Player is missing\n");
 	else if (i == 9)
@@ -26,9 +26,12 @@ void	handle_error_parsing_map(int i)
 		printf("Strange symbol found in the map\n");
 	else if (i == 11)
 		printf("wrong name for texture\n");
+	else if (i == 12)
+		printf("Map not found\n");
+	return (1);
 }
 
-void	handle_error(int i)
+int	handle_error(int i)
 {
 	printf("Error\n");
 	if (i == 1)
@@ -42,5 +45,6 @@ void	handle_error(int i)
 	else if (i == 5)
 		printf("Wrong number use for Floor or Ceiling in the map\n");
 	else
-		handle_error_parsing_map(i);
+		return (handle_error_parsing_map(i));
+	return (1);
 }

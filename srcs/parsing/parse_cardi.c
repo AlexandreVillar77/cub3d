@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:07 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 11:26:05 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:39:23 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int	parse_no(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cno = add_one_char(cno, buf);
+		cube->map->no = add_one_char(cube->map->no, buf);
 	while (i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cno = add_one_char(cno, buf);
+		cube->map->no = add_one_char(cube->map->no, buf);
 	}
 	return (0);
 }
@@ -74,13 +74,13 @@ int	parse_so(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cso = add_one_char(cso, buf);
+		cube->map->so = add_one_char(cube->map->so, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cso = add_one_char(cso, buf);
+		cube->map->so = add_one_char(cube->map->so, buf);
 	}
 	return (0);
 }
@@ -100,13 +100,13 @@ int	parse_ea(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cea = add_one_char(cea, buf);
+		cube->map->ea = add_one_char(cube->map->ea, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cea = add_one_char(cea, buf);
+		cube->map->ea = add_one_char(cube->map->ea, buf);
 	}
 	return (0);
 }
@@ -126,13 +126,13 @@ int	parse_we(int fd, t_cube *cube)
 			break ;
 	}
 	if (i > 0)
-		cwe = add_one_char(cwe, buf);
+		cube->map->we = add_one_char(cube->map->we, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
 		if (i <= 0 || buf == '\n')
 			break ;
-		cwe = add_one_char(cwe, buf);
+		cube->map->we = add_one_char(cube->map->we, buf);
 	}
 	return (0);
 }

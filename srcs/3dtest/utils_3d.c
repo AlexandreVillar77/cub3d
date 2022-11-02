@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dir.c                                              :+:      :+:    :+:   */
+/*   utils_3d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 15:24:50 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/02 10:10:04 by avillar          ###   ########.fr       */
+/*   Created: 2022/11/02 10:27:47 by avillar           #+#    #+#             */
+/*   Updated: 2022/11/02 11:03:43 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	check_x(float px, float p, int max)
+void	color_pixel(uint8_t *pixel, uint8_t *color)
 {
-	if (px > 0 + max / p || p < 0 - max / p)
-	{
-		if (px > 0)
-			return (-1);
-		else
-			return (1);
-	}
-	return (0);
+	pixel[0] = color[0];
+	pixel[1] = color[1];
+	pixel[2] = color[2];
+	pixel[3] = color[3];
 }
 
-int	py_a(float py, float p, int max)
+void	draw_back(t_img **backg, uint8_t *ceil, uint8_t *floor)
 {
-	if (p > 0)
+	int		i;
+	int		a;
+
+	i = 0;
+	a = 4 * WINW * WINH;
+	while (i < a)
 	{
-		if (py > 0)
-			py -= p / max;
-		return (py);
-	}
-	else
-	{
-		if (py < 0)
-			py += p / max;
-		return (py);
+		if (i < (a / 2))
+			color_pixel((*backg)->pimg + i, ceil);
+		if (i > (a / 2))
+			color_pixel((*backg)->pimg + i, floor);
+		i += 4;
 	}
 }

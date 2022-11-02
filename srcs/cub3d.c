@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:49:30 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/26 10:36:30 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 09:31:41 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	main(int argc, char **argv)
 	cube = init_cube();
 	fd = open(argv[1], O_RDWR);
 	read_keep(fd, cube);
-	tab_xy(cube);
-	close (fd);
 	if (access_texture(cube->map) == 1 || check_map(cube->map) == 1)
 	{
 		free_cube(cube);

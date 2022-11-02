@@ -3,32 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   size_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:55:52 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/20 14:22:34 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:55:39 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	alloc_size_texture(t_cube *cube)
+int	check_for_wp(char c)
 {
-	get_size(cube, cube->map->NO, 1);
-	get_size(cube, cube->map->NO, 2);
-	get_size(cube, cube->map->NO, 3);
-	get_size(cube, cube->map->NO, 4);
+	if (c == '\t' || c == '\r' || c == '\v' || c == '\n' || c == ' '
+		|| c == '\f')
+		return (1);
+	else
+		return (0);
 }
 
-void	get_size(t_cube *cube, char *file, int i)
+char	*reset_rtn(char *rtn)
 {
-	char	*str;
+	free (rtn);
+	rtn = malloc(sizeof(char));
+	rtn[0] = '\0';
+	return (rtn);
+}
 
-	str = malloc(sizeof(char));
-	str[0] = '\0';
-	pos_size();
-	if (i == 1)
+char	*skip(int fd)
+{
+	int		x;
+	char	buf;
+	char	*rtn;
+
+	x = 1;
+	rtn = malloc(sizeof(char));
+	while (x > 0)
 	{
-
+		x = read(fd, &buf, 1);
+		if (x < 1)
+		{
+			free (rtn);
+			return (NULL);
+		}
+		if (buf == '\n')
+			rtn = reset_rtn(rtn);
+		else
+			rtn = add_one_char(rtn, buf);
+		if (buf == '1')
+			break ;
 	}
+	return (rtn);
+}
+
+char	*map_to_str(int fd)
+{
+	int		x;
+	char	buf;
+	char	*rtn;
+
+	rtn = skip(fd);
+	x = 1;
+	while (x > 0)
+	{
+		x = read(fd, &buf, 1);
+		if (x < 0)
+			return (NULL);
+		if (x > 0)
+			rtn = add_one_char(rtn, buf);
+	}
+	return (rtn);
 }

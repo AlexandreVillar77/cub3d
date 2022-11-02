@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:49:47 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/26 11:13:59 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:38:16 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ t_map	*init_map(void)
 	map = malloc(sizeof(t_map));
 	if (!map)
 		exit(EXIT_FAILURE);
-	map->Cellcolor = NULL;
-	map->Fcolor = NULL;
+	map->cellcolor = NULL;
+	map->fcolor = NULL;
 	map->map = NULL;
-	map->NO = NULL;
-	map->EA = NULL;
-	map->SO = NULL;
-	map->WE = NULL;
+	map->no = NULL;
+	map->ea = NULL;
+	map->so = NULL;
+	map->we = NULL;
 	return (map);
 }
 
@@ -40,8 +40,8 @@ t_mlx	*init_ml(void)
 	mlx->mapdone = 0;
 	mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = NULL;
-	mlx->win_sx = winW;
-	mlx->win_sy = winH;
+	mlx->win_sx = WINW;
+	mlx->win_sy = WINH;
 	mlx->x = 0;
 	mlx->y = 0;
 	mlx->squarex = 0;
@@ -64,5 +64,6 @@ t_cube	*init_cube(void)
 	cube->chara_move = 1;
 	cube->mapls = NULL;
 	cube->dd = NULL;
+	cube->texture = NULL;
 	return (cube);
 }

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:43:38 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/25 10:07:08 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:38:48 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ t_axpm	*init_texture(t_cube *cube)
 	texture = malloc(sizeof(t_axpm));
 	if (!texture)
 		exit (EXIT_FAILURE);
-	texture->no = init_tdata(cube, cube->map->NO);
-	texture->so = init_tdata(cube, cube->map->SO);
-	texture->ea = init_tdata(cube, cube->map->EA);
-	texture->we = init_tdata(cube, cube->map->WE);
+	texture->no = init_tdata(cube, cube->map->no);
+	texture->so = init_tdata(cube, cube->map->so);
+	texture->ea = init_tdata(cube, cube->map->ea);
+	texture->we = init_tdata(cube, cube->map->we);
 	if (check_textures(cube, texture) == 1)
 		return (NULL);
 	return (texture);

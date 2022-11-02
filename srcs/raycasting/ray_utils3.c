@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_player.c                               :+:      :+:    :+:   */
+/*   ray_utils3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/15 09:40:06 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 09:49:53 by thbierne         ###   ########.fr       */
+/*   Created: 2022/11/02 10:19:58 by thbierne          #+#    #+#             */
+/*   Updated: 2022/11/02 10:22:45 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	print_error_player(int player)
+void	modif_x_y(t_ray *ray)
 {
-	if (player == 0 || player >= 2)
-	{
-		if (player == 0)
-			return (handle_error(8));
-		else
-			return (handle_error(9));
-	}
-	return (0);
+	ray->dist_x += (double)ray->pdx;
+	ray->dist_y += (double)ray->pdy;
+	ray->x += (double)ray->pdx;
+	ray->y += (double)ray->pdy;
 }

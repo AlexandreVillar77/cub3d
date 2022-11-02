@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:11:34 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 11:03:23 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 10:57:14 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,31 @@ void	get_pos(t_chara *chara, t_cube *cube)
 
 	j = 0;
 	stop = 0;
-	while (cmap[j])
+	while (cube->map->map[j])
 	{
 		i = 0;
-		while (cmap[j][i])
+		while (cube->map->map[j][i])
 		{
-			if (check_pos(cmap[j][i]) == 0)
+			if (check_pos(cube->map->map[j][i]) == 0)
 				stop = -1;
 			if (stop == -1)
 				break ;
 			i++;
 		}
 		if (stop == -1)
-				break ;
+			break ;
 		j++;
 	}
 	chara->posx = i;
 	chara->posy = j;
-	chara->dir = cmap[j][i];
+	chara->dir = cube->map->map[j][i];
 }
 
 t_chara	*init_char(t_cube *cube)
 {
 	t_chara	*chara;
 
-	chara = malloc(sizeof(t_chara ));
+	chara = malloc(sizeof(t_chara));
 	if (!chara)
 		exit (EXIT_FAILURE);
 	chara->sx = cube->mlx->squarex / 4;

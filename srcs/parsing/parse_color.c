@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 10:12:30 by avillar           #+#    #+#             */
-/*   Updated: 2022/10/21 11:26:12 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:35:41 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ char	s_wp(int fd)
 	return (buf);
 }
 
+char	*malloc_and_set(int i, char c)
+{
+	char	*str;
+
+	str = malloc(sizeof(char) * 1);
+	if (!str)
+		return (NULL);
+	str[0] = '\0';
+	if (i > 0)
+		str = add_one_char(str, c);
+	return (str);
+}
+
 int	parse_fc(int fd, t_cube *cube)
 {
 	char	buf;
@@ -44,10 +57,7 @@ int	parse_fc(int fd, t_cube *cube)
 		if (i <= 0 || check_for_wp(buf) == 0)
 			break ;
 	}
-	cfc = malloc(sizeof(char) * 1);
-	cfc[0] = '\0';
-	if (i > 0)
-		cfc = add_one_char(cfc, buf);
+	cfc = malloc_and_set(i, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
@@ -55,7 +65,7 @@ int	parse_fc(int fd, t_cube *cube)
 			break ;
 		cfc = add_one_char(cfc, buf);
 	}
-	cmfc = ft_split(cfc, ',');
+	cube->map->fcolor = ft_split(cfc, ',');
 	free (cfc);
 	return (0);
 }
@@ -75,10 +85,7 @@ int	parse_cellcolor(int fd, t_cube *cube)
 		if (i <= 0 || check_for_wp(buf) == 0)
 			break ;
 	}
-	ccc = malloc(sizeof(char) * 1);
-	ccc[0] = '\0';
-	if (i > 0)
-		ccc = add_one_char(ccc, buf);
+	ccc = malloc_and_set(i, buf);
 	while (buf != '\n' && i > 0)
 	{
 		i = read(fd, &buf, 1);
@@ -86,7 +93,7 @@ int	parse_cellcolor(int fd, t_cube *cube)
 			break ;
 		ccc = add_one_char(ccc, buf);
 	}
-	cmcc = ft_split(ccc, ',');
+	cube->map->cellcolor = ft_split(ccc, ',');
 	free (ccc);
 	return (0);
 }

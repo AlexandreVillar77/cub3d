@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:05:39 by thbierne          #+#    #+#             */
-/*   Updated: 2022/10/27 13:26:17 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:33:27 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_cub(char *argv)
 	if (argv[i] != 'b' || argv[i - 1] != 'u'
 		|| argv[i - 2] != 'c' || argv[i - 3] != '.')
 		return (1);
-	else if ( i == 4 && argv[i] == 'b' && argv[i - 1] == 'u'
+	else if (i == 4 && argv[i] == 'b' && argv[i - 1] == 'u'
 		&& argv[i - 2] == 'c' && argv[i - 3] == '.'
 		&& argv[i - 4] == '.')
 		return (1);
@@ -32,31 +32,19 @@ int	check_cub(char *argv)
 int	check_arg(int argc, char **argv)
 {
 	if (argc != 2)
-	{
-		handle_error(1);
-		return (1);
-	}
+		return (handle_error(1));
 	if (check_cub(argv[1]) == 1)
-	{
-		handle_error(2);
-		return (1);
-	}
+		return (handle_error(2));
 	if (access(argv[1], R_OK) != 0)
-	{
-		handle_error(3);
-		return (1);
-	}
+		return (handle_error(3));
 	return (0);
 }
 
 int	check_access(t_map *map)
 {
-	if (access(map->NO, R_OK) == -1 || access(map->SO, R_OK) == -1
-		|| access(map->WE, R_OK) == -1 || access(map->EA, R_OK) == -1)
-	{
-		handle_error(4);
-		return (1);
-	}
+	if (access(map->no, R_OK) == -1 || access(map->so, R_OK) == -1
+		|| access(map->we, R_OK) == -1 || access(map->ea, R_OK) == -1)
+		return (handle_error(4));
 	return (0);
 }
 
