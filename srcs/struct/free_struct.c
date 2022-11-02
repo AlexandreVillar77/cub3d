@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:51:41 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/02 11:37:41 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 15:34:55 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ void	free_cube(t_cube *cube)
 	dest_mlx(cube);
 	if (cube->map)
 		free(cube->map);
+	if (cube->key)
+		free (cube->key);
 	free(cube);
 }

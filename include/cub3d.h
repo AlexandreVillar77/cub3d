@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 14:16:11 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:54:02 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_ddd	t_ddd;
 typedef struct s_ray	t_ray;
 typedef struct s_axpm	t_axpm;
 typedef struct s_tdata	t_tdata;
+typedef struct s_key	t_key;
 
 //pos_rayx[2]; coordonner impact rayon x (x,y)
 //pos_rayy[2]; coordonner impact rayon y (x,y)
@@ -183,6 +184,18 @@ struct s_tdata
 //mapls		nombre de carre de la map pour chaque ligne
 //chara_move   0 = le joueur ne bouge pas; 1 = deplacement joueur
 
+struct s_key
+{
+	int			move;
+	int			turn;
+	int			np;
+	int			sp;
+	int			wp;
+	int			ep;
+	int			df;
+	int			gf;
+};
+
 struct s_cube
 {
 	int			largestl;
@@ -193,8 +206,7 @@ struct s_cube
 	t_mlx		*mlx;
 	t_map		*map;
 	t_ddd		*dd;
-	int			keyp;
-	int			keysym;
+	t_key		*key;
 };
 
 /*	check debut de programme	*/
