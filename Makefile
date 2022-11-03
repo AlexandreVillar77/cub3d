@@ -6,7 +6,7 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:48:10 by thbierne          #+#    #+#              #
-#    Updated: 2022/11/02 10:28:34 by avillar          ###   ########.fr        #
+#    Updated: 2022/11/03 10:57:39 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ SRCS =	srcs/cub3d.c								\
 		srcs/3dtest/draw_wall.c						\
 		srcs/xpm_treatement/xpm_to_img.c			\
 		srcs/xpm_treatement/get_pixel_color.c		\
+		srcs/gnl/gnl.c								\
+		srcs/gnl/gnl_utils.c						\
 
 OBJS = $(SRCS:.c=.o)
 

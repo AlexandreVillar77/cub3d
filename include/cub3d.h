@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 14:54:02 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 11:01:09 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,5 +358,14 @@ t_ddd	*init_ddd(t_cube *cube);
 //utils_3d.c
 void	color_pixel(uint8_t *pixel, uint8_t *color);
 void	draw_back(t_img **backg, uint8_t *ceil, uint8_t *floor);
+
+//gnl
+
+int		ft_linelen(char *str);
+int		ft_strlen(char *str);
+char	*ft_strcat(char *src, char *tmp);
+char	*checkbuf(char *buf, char *keep);
+char	*putline(char *keep);
+int		get_next_line(int fd, char **line);
 
 #endif
