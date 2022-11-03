@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:55:52 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 09:55:39 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 11:42:34 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,41 @@ char	*skip(int fd)
 	return (rtn);
 }
 
+/*
+	x = read(fd, &buf, 1);
+	if (x < 0)
+		return (NULL);
+	if (x > 0)
+		rtn = add_one_char(rtn, buf);
+*/
+
 char	*map_to_str(int fd)
 {
 	int		x;
-	char	buf;
 	char	*rtn;
+	char	*line;
+	char	*tmp;
 
 	rtn = skip(fd);
-	x = 1;
+	line = NULL;
+	x = get_next_line(fd, &line);
 	while (x > 0)
 	{
-		x = read(fd, &buf, 1);
-		if (x < 0)
-			return (NULL);
-		if (x > 0)
-			rtn = add_one_char(rtn, buf);
+		tmp = ft_strjoin(rtn, line);
+		free (rtn);
+		rtn = ft_strjoin(tmp, "\n");
+		free (tmp);
+		free (line);
+		x = get_next_line(fd, &line);
 	}
+	if (line)
+	{
+		tmp = ft_strjoin(rtn, line);
+		free (rtn);
+		rtn = ft_strjoin(tmp, "\n");
+		free (tmp);
+		free (line);
+	}
+	printf("%s\n", rtn);
 	return (rtn);
 }

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:24:23 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 15:29:17 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 10:39:47 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	handle_keys(int keysym, int n, t_cube *cube, int c)
 			cube->key->ep = n;
 		else if (keysym == S)
 			cube->key->sp = n;
-		cube->key->move = n;
+		if (keysym == W || keysym == A || keysym == D || keysym == S)
+			cube->key->move = n;
 	}
 	if (cube->key->turn == c)
 	{
@@ -32,7 +33,8 @@ void	handle_keys(int keysym, int n, t_cube *cube, int c)
 			cube->key->gf = n;
 		else if (keysym == DF)
 			cube->key->df = n;
-		cube->key->turn = n;
+		if (keysym == GF || keysym == DF)
+			cube->key->turn = n;
 	}
 }
 
@@ -47,7 +49,8 @@ int	handle_keyup(int keysym, t_cube *cube)
 		cube->key->ep = 0;
 	else if (keysym == S)
 		cube->key->sp = 0;
-	cube->key->move = 0;
+	if (keysym == W || keysym == A || keysym == D || keysym == S)
+		cube->key->move = 0;
 	if (keysym == GF)
 	{
 		cube->key->gf = 0;
