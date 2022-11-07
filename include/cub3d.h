@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:58:10 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/03 11:01:09 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 14:23:19 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,8 @@ void	free_split(char **split);
 
 int		handle_keypress(int keysym, t_cube *cube);
 int		render(t_cube *cube);
+int		prog_leaver(t_cube *cube);
+int		render(t_cube *cube);
 void	ml_loop(t_cube *cube);
 
 /* struct related */
@@ -332,6 +334,17 @@ void	draw_east(t_ddd **dd, t_cube *cube, t_ray *ray);
 void	draw_west(t_ddd **dd, t_cube *cube, t_ray *ray);
 void	draw_south(t_ddd **dd, t_cube *cube, t_ray *ray);
 
+//key handle
+
+void	handle_keys(int keysym, int n, t_cube *cube, int c);
+int		handle_keyup(int keysym, t_cube *cube);
+int		handle_keypress(int keysym, t_cube *cube);
+
+void	update_posx_y(t_cube *cube);
+void	rotate(t_cube *cube);
+int		render(t_cube *cube);
+int		prog_leaver(t_cube *cube);
+
 //test 3d
 
 char	**malloc_lines(char **dest, int l, int n);
@@ -361,11 +374,13 @@ void	draw_back(t_img **backg, uint8_t *ceil, uint8_t *floor);
 
 //gnl
 
-int		ft_linelen(char *str);
-int		ft_strlen(char *str);
-char	*ft_strcat(char *src, char *tmp);
-char	*checkbuf(char *buf, char *keep);
-char	*putline(char *keep);
 int		get_next_line(int fd, char **line);
+int		check_return(char **line, char **memory, int read_char, char *buffer);
+int		creat_line(char **line, char **memory);
+int		no_leaks(char **line, char **memory, char *buffer, int ret);
+
+char	*ft_strnew(size_t size);
+char	*alloc_read(char **memory, int fd, char *buffer);
+char	**free_memory(char **memory, char *tmp);
 
 #endif

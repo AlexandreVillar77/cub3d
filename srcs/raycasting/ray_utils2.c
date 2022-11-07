@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:13:49 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 11:08:10 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 10:44:10 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	alloc_delta(t_ray *ray, t_cube *cube, int i)
 
 void	calcul_eucli(t_ray *ray, t_cube *cube, int i)
 {
-	int		x;
-	int		y;
+	long long int	x;
+	long long int	y;
 
 	if (i == 0)
 	{
@@ -67,8 +67,9 @@ void	calcul_eucli(t_ray *ray, t_cube *cube, int i)
 		x *= -1;
 	if (y < 0)
 		y *= -1;
-	ray->eucli = (float)((float)(x * x) + (float)(y * y));
-	ray->eucli = (float)sqrtf(ray->eucli);
+	x = (x * x) + (y * y);
+	ray->eucli = x;
+	ray->eucli = sqrtf(ray->eucli);
 }
 
 void	alloc_sidedist(t_ray *ray, t_cube *cube, int i)

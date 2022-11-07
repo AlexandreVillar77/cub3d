@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
+#    By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 10:48:10 by thbierne          #+#    #+#              #
-#    Updated: 2022/11/03 10:57:39 by avillar          ###   ########.fr        #
+#    Updated: 2022/11/03 14:23:38 by thbierne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS =	srcs/cub3d.c								\
 		srcs/damier/image.c							\
 		srcs/damier/dir.c							\
 		srcs/damier/char.c							\
+		srcs/damier/key.c							\
 		srcs/raycasting/ray_calcul.c				\
 		srcs/raycasting/ray_utils.c					\
 		srcs/raycasting/ray_utils2.c				\

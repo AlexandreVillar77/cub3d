@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   size_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:55:52 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/03 11:42:34 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/04 09:38:21 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*skip(int fd)
 
 	x = 1;
 	rtn = malloc(sizeof(char));
+	rtn[0] = '\0';
 	while (x > 0)
 	{
 		x = read(fd, &buf, 1);
@@ -63,6 +64,29 @@ char	*skip(int fd)
 		rtn = add_one_char(rtn, buf);
 */
 
+char	*jon(char *dest, char *line)
+{
+	char	*tmp;
+
+	if (line[0] == '\0')
+	{
+		tmp = ft_strjoin(dest, " \n");
+		free (dest);
+		dest = ft_strcpy(tmp);
+		free (tmp);
+		free (line);
+	}
+	else
+	{
+		tmp = ft_strjoin(dest, line);
+		free (dest);
+		dest = ft_strjoin(tmp, "\n");
+		free (tmp);
+		free (line);
+	}
+	return (dest);
+}
+
 char	*map_to_str(int fd)
 {
 	int		x;
@@ -75,11 +99,7 @@ char	*map_to_str(int fd)
 	x = get_next_line(fd, &line);
 	while (x > 0)
 	{
-		tmp = ft_strjoin(rtn, line);
-		free (rtn);
-		rtn = ft_strjoin(tmp, "\n");
-		free (tmp);
-		free (line);
+		rtn = jon(rtn, line);
 		x = get_next_line(fd, &line);
 	}
 	if (line)
@@ -90,6 +110,5 @@ char	*map_to_str(int fd)
 		free (tmp);
 		free (line);
 	}
-	printf("%s\n", rtn);
 	return (rtn);
 }

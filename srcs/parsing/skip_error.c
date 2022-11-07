@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 09:52:10 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/02 14:11:07 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 14:44:12 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,19 @@ int	manage_error(char c, int mode, t_cube *cube)
 {
 	(void)c;
 	if (mode == 1)
+	{
 		cube->map->error = 1;
+		printf("Error\nWrong parameters on textures\n");
+		free_cube(cube);
+		exit (EXIT_FAILURE);
+	}
 	else if (mode == 2)
+	{
 		cube->map->error = 2;
+		printf("Error\nWrong parameters on color\n");
+		free_cube(cube);
+		exit (EXIT_FAILURE);
+	}
 	return (1);
 }
 

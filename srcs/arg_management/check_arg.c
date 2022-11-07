@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:05:39 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 11:33:27 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/04 09:46:55 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ int	check_cub(char *argv)
 	int	i;
 
 	i = ft_strlen(argv);
-	if (i-- < 4)
+	if (i-- <= 4)
 		return (1);
 	if (argv[i] != 'b' || argv[i - 1] != 'u'
 		|| argv[i - 2] != 'c' || argv[i - 3] != '.')
 		return (1);
-	else if (i == 4 && argv[i] == 'b' && argv[i - 1] == 'u'
+	else if (i >= 4 && argv[i] == 'b' && argv[i - 1] == 'u'
 		&& argv[i - 2] == 'c' && argv[i - 3] == '.'
 		&& argv[i - 4] == '.')
+		return (1);
+	else if (i >= 4 && argv[i] == 'b' && argv[i - 1] == 'u'
+		&& argv[i - 2] == 'c' && argv[i - 3] == '.'
+		&& argv[i - 4] == '/')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 12:32:31 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 09:44:37 by thbierne         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:01:01 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ int	check_middle_2(char **map, int *player, int i, int y)
 	{
 		while (map[i][y] == ' ')
 			y++;
-		if (map[i][y] == '0')
+		if (map[i][y] == '\0')
+			y--;
+		else if (map[i][y] == '0')
 		{
 			if (check_around(map, i, y) == 1)
 				return (1);

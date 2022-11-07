@@ -3,93 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:52:11 by avillar           #+#    #+#             */
-/*   Updated: 2022/11/03 11:46:46 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 14:10:47 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-char	*cleankeep(char *keep, int len)
+int	no_leaks(char **line, char **memory, char *buffer, int ret)
+{
+	if (ret == -2)
+		return (-1);
+	if (*line && line[0] == 0 && ret == -1)
+		free(*line);
+	if ((*memory == 0 && memory[0] != NULL) || ret != 1)
+	{
+		free(memory[0]);
+		memory[0] = NULL;
+	}
+	if (buffer)
+		free(buffer);
+	return (ret);
+}
+
+int	creat_line(char **line, char **memory)
 {
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	if (len <= 1)
-		return (NULL);
-	if (ft_strlen(keep) == len)
-	{
-		free(keep);
-		return (NULL);
-	}
-	if (keep[len] == '\n')
-		len++;
-	tmp = malloc(sizeof(char) * ((ft_strlen(keep) - len) + 2));
-	if (!tmp)
-		return (0);
-	while (keep[i + len])
-	{
-		tmp[i] = keep[i + len];
+	while (memory[0][i] != '\n' && memory[0][i])
 		i++;
-	}
-	tmp[i] = '\0';
-	free(keep);
-	return (tmp);
-}
-
-int		ft_linelen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\n' && str[i])
-		i++;
-	return (i);
-}
-
-int		is_line(char *keep)
-{
-	int		i;
-
-	i = 0;
-	if (keep)
+	if (memory[0][i] == '\n')
 	{
-		while (keep[i] != '\n' && keep[i] != '\0')
-			i++;
-		if (keep[i] == '\n')
-			return (1);
-	}
-	return (0);
-}
-
-int		get_next_line(int fd, char **line)
-{
-	char		*buf;
-	int			x;
-	static char	*keep;
-
-	x = 1;
-	buf = malloc(100 + 1);
-	if (fd < 0 || !line || 100 <= 0 || !buf)
-		return (-1);
-	while (is_line(keep) == 0 && x != 0)
-	{
-		x = read(fd, buf, 100);
-		if (x == -1)
-		{
-			free(buf);
+		memory[0][i] = '\0';
+		*line = ft_strdup(memory[0]);
+		if (!(*line))
 			return (-1);
-		}
-		buf[x] = '\0';
-		keep = checkbuf(buf, keep);
+		tmp = ft_strdup(&memory[0][i + 1]);
+		if (!tmp)
+			return (-1);
+		memory = free_memory(memory, tmp);
 	}
-	free(buf);
-	*line = putline(keep);
-	keep = cleankeep(keep, ft_strlen(*line));
-	if (x == 0)
-		return (0);
+	else if (1)
+	{
+		*line = ft_strdup(memory[0]);
+		if (!(*line))
+			return (-1);
+	}
 	return (1);
+}
+
+int	check_return(char **line, char **memory, int read_char, char *buffer)
+{
+	int	ret;
+
+	if (read_char < 0)
+		return (no_leaks(line, &memory[0], buffer, -1));
+	else if (read_char == 0 && *memory == 0)
+	{
+		*line = ft_strdup("\0");
+		if (!(*line))
+			return (no_leaks(line, &memory[0], buffer, -1));
+		return (no_leaks(line, &memory[0], buffer, 0));
+	}
+	else if (read_char == 0 && (!ft_strchr(memory[0], '\n')))
+	{
+		*line = ft_strdup(memory[0]);
+		if (!(*line))
+			return (no_leaks(line, &memory[0], buffer, -1));
+		return (no_leaks(line, &memory[0], buffer, 0));
+	}
+	ret = creat_line(line, memory);
+	return (no_leaks(line, &memory[0], buffer, ret));
+}
+
+int	get_next_line(int fd, char **line)
+{
+	static char		*memory[8192];
+	char			*buffer;
+	int				read_char;
+
+	buffer = ft_strnew(1000);
+	if (!buffer)
+		return (no_leaks(line, &memory[fd], buffer, -1));
+	if ((1000 <= 0) || (line == NULL) || (fd < 0))
+		return (no_leaks(line, &memory[fd], buffer, -2));
+	read_char = read(fd, buffer, 1000);
+	while (read_char > 0)
+	{
+		buffer[read_char] = '\0';
+		if (memory[fd] == NULL)
+			memory[fd] = ft_strdup(buffer);
+		else
+			memory[fd] = alloc_read(memory, fd, buffer);
+		if (ft_strchr(memory[fd], '\n'))
+			break ;
+		read_char = read(fd, buffer, 1000);
+	}
+	return (check_return(line, &memory[fd], read_char, buffer));
 }

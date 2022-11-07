@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_calcul.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thbierne <thbierne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:17:09 by thbierne          #+#    #+#             */
-/*   Updated: 2022/11/02 11:08:49 by avillar          ###   ########.fr       */
+/*   Updated: 2022/11/03 14:19:10 by thbierne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,6 @@ void	check_wall_y(t_ray *ray, t_cube *cube, int x, int y)
 {
 	ray->pos_rayy[0] = x;
 	ray->pos_rayy[1] = y;
-	if (ray->sidedist[1] == -1)
-		alloc_sidedist(ray, cube, 1);
-	else if (ray->delta[1] == -1)
-		alloc_delta(ray, cube, 1);
 	ray->nbr_delta[1]++;
 	x = ray->pos_rayy[0] / cube->mlx->squarex;
 	if (ray->pdy < 0)
@@ -114,10 +110,6 @@ void	check_wall_x(t_ray *ray, t_cube *cube, int x, int y)
 {
 	ray->pos_rayx[0] = x;
 	ray->pos_rayx[1] = y;
-	if (ray->sidedist[0] == -1)
-		alloc_sidedist(ray, cube, 0);
-	else if (ray->delta[0] == -1)
-		alloc_delta(ray, cube, 0);
 	ray->nbr_delta[0]++;
 	if (ray->pdx < 0)
 		x = (ray->pos_rayx[0] - 1) / cube->mlx->squarex;
